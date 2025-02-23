@@ -51,9 +51,31 @@
             font-size: 0.85rem; /* Smaller list text */
         }
 
+        .nav {
+            margin-bottom: 2rem;
+        }
+
+        .nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            margin-right: 2.5rem;  /* This controls the gap between nav items */
+            font-size: 0.85rem;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        .nav a.active {
+            text-decoration: underline;
+        }
+        
+
         @media (max-width: 700px) {
             body {
-                padding: 2.5rem;
+                padding: 1.5rem;
             }
         }
     </style>
