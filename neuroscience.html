@@ -3,65 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuroscience</title>
     <style>
         body {
             font-family: Avenir, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.5;
             max-width: 650px;
             margin: 0;
-            padding: 2rem;
+            padding: 1rem;  /* Reduced to 1rem to match home page */
             color: #1a1a1a;
             font-size: 0.85rem;
         }
 
-        .topics a {
-            color: #1a1a1a;
-            text-decoration: underline;
-            display: block; /* Makes each link take its own line */
-            margin-bottom: 1.5rem; /* Space between links */
-            font-size: 0.85rem;
+        nav {
+            margin: 1rem 0;  /* Adjusted to match home page spacing */
         }
 
-        .topics a:hover {
-            text-decoration: none; /* Keeps underline removed on hover */
-        }
-
-        .nav {
-            margin-bottom: 2rem;
-        }
-
-        .nav a {
+        nav a {
             color: #1a1a1a;
             text-decoration: none;
-            margin-right: 1.5rem;
+            margin-right: 7rem;  /* Matches home page spacing */
             font-size: 0.85rem;
         }
 
-        .nav a:hover {
+        nav a:hover {
             text-decoration: underline;
             text-decoration-thickness: 1px;
             text-underline-offset: 2px;
         }
 
-        .nav a.active {
+        nav a.active {
             text-decoration: underline;
         }
 
-        a {
-            color: #1a1a1a;
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
-        }
-
-        p {
-            margin-bottom: 1.5rem;
+        /* Topic links styling */
+        .topics a {
+            color: #FF5F1F;  /* Orange color */
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1rem;  /* Reduced from 1.5rem to match spacing */
+            font-size: 0.85rem;
+            font-weight: 700;  /* Bold */
         }
 
         ul {
             list-style: none;
             padding: 0;
-            margin: 2rem 0;
+            margin: 1rem 0;  /* Adjusted to match spacing */
         }
 
         li {
@@ -70,12 +58,12 @@
     </style>
 </head>
 <body>
-    <div class="nav">
+    <nav>
         <a href="index.html">Home</a>
         <a href="neuroscience.html" class="active">Neuroscience</a>
         <a href="theoretical-ai.html">Theoretical AI</a>
         <a href="projects.html">Projects</a>
-    </div>
+    </nav>
 
     <ul class="topics">
         <li><a href="subitizing.html">How Subitizing Works</a></li>
