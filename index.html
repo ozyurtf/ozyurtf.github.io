@@ -9,23 +9,25 @@
             font-family: Avenir, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.5;
             max-width: 650px;
-            margin: 0;  /* Removed auto margins */
-            padding: 2rem;
+            margin: 0;
+            padding: 1rem;
             color: #1a1a1a;
-            font-size: 0.85rem; /* Even smaller base font size */
+            font-size: 0.85rem;
         }
 
         h1 {
-            font-size: 1.2rem; /* Smaller heading */
+            font-size: 1.2rem;
             font-weight: 500;
-            margin-bottom: 1.5rem;
-            text-align: left; /* Explicit left alignment */
+            margin-bottom: 1rem;
+            text-align: left;
+            margin-top: 0;
         }
 
         p {
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem; /* Smaller paragraph text */
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
             text-align: left;
+            margin-top: 0;
         }
 
         a {
@@ -39,60 +41,44 @@
             text-decoration-thickness: 2px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            text-align: left;
+        nav {
+            margin: 1rem 0;
         }
 
-        li {
-            margin-bottom: 0.8rem;
-            font-size: 0.85rem; /* Smaller list text */
-        }
-
-        .nav {
-            margin-bottom: 2rem;
-        }
-
-        .nav a {
+        nav a {
             color: #1a1a1a;
             text-decoration: none;
-            margin-right: 5rem;  /* This controls the gap between nav items */
+            margin-right: 7rem;  /* Increased from 5rem to 7rem */
             font-size: 0.85rem;
         }
 
-        .nav a:hover {
+        nav a:hover {
             text-decoration: underline;
             text-decoration-thickness: 1px;
             text-underline-offset: 2px;
         }
 
-        .nav a.active {
+        nav a.active {
             text-decoration: underline;
         }
-        
 
         @media (max-width: 700px) {
             body {
-                padding: 1.5rem;
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <h1>Furkan Ozyurt</h1>
-
     <p>
-        Master of Science student in Computer Science at New York University's Courant Institute, with experience in training, evaluating, deploying, and maintaining machine learning and deep learning models. Experienced in Python, C++, AWS, Azure, Databricks, Git, Docker, Kubernetes, MLOPs, and deep learning frameworks such as PyTorch and Keras. Possesses strong theoretical knowledge of various deep learning architectures, including CNNs, RNNs, LSTMs, Transformers, Autoencoders, VAEs, GANs, and Diffusion Models. Has familiarity with GPU architecture and CUDA programming. 
+        Master of Science student in Computer Science at New York University's Courant Institute, with experience in training, evaluating, deploying, and maintaining machine learning and deep learning models. Experienced in Python, C++, AWS, Azure, Databricks, Git, Docker, Kubernetes, MLOPs, and deep learning frameworks such as PyTorch and Keras. Possesses strong theoretical knowledge of various deep learning architectures, including CNNs, RNNs, LSTMs, Transformers, Autoencoders, VAEs, GANs, and Diffusion Models. Has familiarity with GPU architecture and CUDA programming.
     </p>
-
     <nav>
         <a href="index.html" class="active">Home</a>
         <a href="neuroscience.html">Neuroscience</a>
         <a href="theoretical-ai.html">Theoretical AI</a>
         <a href="projects.html">Projects</a>
     </nav>
-
 </body>
 </html>
