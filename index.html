@@ -9,21 +9,23 @@
             font-family: Avenir, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.5;
             max-width: 650px;
-            margin: 0 auto;
+            margin: 0;  /* Removed auto margins */
             padding: 2rem;
             color: #1a1a1a;
-            font-size: 0.95rem; /* Smaller base font size */
+            font-size: 0.85rem; /* Even smaller base font size */
         }
 
         h1 {
-            font-size: 1.5rem; /* Smaller heading */
-            font-weight: 500; /* Avenir looks better with slightly lighter weight */
+            font-size: 1.2rem; /* Smaller heading */
+            font-weight: 500;
             margin-bottom: 1.5rem;
+            text-align: left; /* Explicit left alignment */
         }
 
         p {
             margin-bottom: 1.5rem;
-            font-size: 0.95rem; /* Smaller paragraph text */
+            font-size: 0.85rem; /* Smaller paragraph text */
+            text-align: left;
         }
 
         a {
@@ -41,11 +43,12 @@
             list-style: none;
             padding: 0;
             margin: 2rem 0;
+            text-align: left;
         }
 
         li {
-            margin-bottom: 0.8rem; /* Slightly reduced spacing */
-            font-size: 0.95rem; /* Smaller list text */
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem; /* Smaller list text */
         }
 
         @media (max-width: 700px) {
