@@ -65,398 +65,203 @@
 </head>
  <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
 </head><body>
-   <h3 class='likesectionHead' id='crossentropy-loss'><a id='x1-1000'></a>Cross-Entropy Loss</h3>
-<!-- l. 10 --><p class='noindent'>Entropy can be defined as the uncertainty, unpredictability, randomness or disorder
-in a set of possible outcomes. <br class='newline' />
-</p><!-- l. 12 --><p class='indent'>   If we build a machine learning model and the model assigns probabilities
-to some scenarios, if the model is not very sure about its predictions, this
-means that the unpredictability and randomness in the model’s predictions
-is high. But we wouldn’t want that. We want our model to be sure and
-certain about its predictions. And because of that, when we build a model, we
-should update the parameters of this model so that we can reduce the overall
-uncertainty and randomness, in other words entropy, of these predictions. But how
-do we represent this unpredictability and randomness mathematically ?
-<br class='newline' />
-</p><!-- l. 14 --><p class='indent'>   One way to measure unpredictability of an outcome is to measure how much we
-are surprised after observing that outcome. Because if the outcome is highly
-predictable, unpredictability is low and we don’t tend to surprise that much after
-observing that outcome. If the outcome is not predictable and if we observe that
-outcome, we tend to surprise. Therefore, if we can be able to calculate how much
-we surprise after observing an outcome, we can see this surprise level as
-unpredictability. Now the question is: how do we express the level of surprise ?
-<br class='newline' />
-</p><!-- l. 16 --><p class='indent'>   The simplest way to express the level of surprise mathematically is using the negative
-probability of the outcome just like we do in our real lives. Because if we observe data
-point <!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>,
-for instance, and if we show the probability of observing data point
-<!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> with
-<!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
-we tend to be more surprised after observing data
-<!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> if the probability
-of observing data <!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-is low. And if the probability of observing data
-<!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-is high, we tend to be less surprised after observing data
-<!-- l. 16 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>.
-<br class='newline' />
-</p><!-- l. 18 --><p class='indent'>   If we press a light switch, for example, the probability of the light turning on is
-very high. Therefore, we are not surprised at all when we observe that the light is on
-after pressing the switch. However, if the light does not turn on, we are quite
-surprised since this is not an expected situation. <br class='newline' />
-</p><!-- l. 20 --><p class='indent'>   We can express this dynamic mathematically is by using the formula
-below.
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 22 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mtd></mtr>                                                            </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 28 --><p class='indent'>   Because as <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-increases, the value of <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-decreases. And as <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-decreases, the value of <!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-increases. In other words, as the probability of observing data
-<!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-increases, the surprise we experience after observing
-<!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-will decrease and as the probability of observing data
-<!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-decreases, the surprise we experience after observing
-<!-- l. 28 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math> will
-increase because it is an unlikely event for us. <br class='newline' />
-</p><!-- l. 30 --><p class='indent'>   But what if we observe multiple outcomes
-<!-- l. 30 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math> ?
-Let’s say that we have a machine learning model that takes 3 images as input. And
-let’s assume that the 1st image is about a dog, the 2nd image is about a bear and the
-3rd image is about a bee. In total, there are 3 classes (dog, bear, and bee) and let’s
-assume that the model assigns different probabilities to these 3 classes for each
-image. <br class='newline' />
-</p><!-- l. 32 --><p class='indent'>   If the model assigns the probability of 0.75 to the dog class in the 1st image, the
-probability of 0.6 to the bear class in the 2nd image and the probability of 0.4 to the
-bee class in the 3rd image, we can calculate the probability of classifying
-1st image as dog AND classifying 2nd image as bear AND classifying 3rd
-image as bee by multiplying these probabilities with the formula below.
-
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 34 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-                            <munderover accent='false' accentunder='false'><mrow><mo>∏</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo>
-</mrow></math></td></tr></table>
-<!-- l. 38 --><p class='indent'>   Previously, we mentioned that if there is a single outcome and the probability of
-<!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> is assigned to this outcome
-<!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>, we can express the level
-of surprise by using <!-- l. 38 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-If we apply the same logic in here, when there are multiple outcomes, we can measure
-the overall surprise level by taking the negative of the product of probabilities.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 40 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-                           <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∏</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo>
-</mrow></math></td></tr></table>
-<!-- l. 44 --><p class='indent'>   So if we turn back to the image classification example, the formula above
-attempts to measure the level of surprise we will experience after seeing
-that the model classified the 1st image as dog with 0.75 probability, 2nd
-image as bear with 0.6 probability and 3rd image as bee with 0.4 probability.
-<br class='newline' />
-</p><!-- l. 46 --><p class='indent'>   However, there are some issues with this method. First of all, multiplication
-of many probabilities that are between 0 and 1 will result in a very small
-number. For instance, if we multiply 0.75, 0.6, 0.4, the result will be 0.18 which
-does not represent the combined effect of using 0.75, 0.6, and 0.4 together.
-To handle this issue, we can take the nth root of the multiplication above.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 48 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-                          <mo class='MathClass-bin' stretchy='false'>−</mo><msup><mrow><mrow><mo fence='true' form='prefix'> (</mo><mrow><munderover accent='false' accentunder='false'><mrow><mo>∏</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow><mrow> <mfrac><mrow><mn>1</mn></mrow> 
-<mrow><mi>n</mi></mrow></mfrac> </mrow></msup>
-</mrow></math></td></tr></table>
-<!-- l. 53 --><p class='indent'>   This will scale the result but now another issue is that the inputs
-<!-- l. 53 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> in
-here are independent from each other. In other words, the dog image does not have
-an impact on the classification of the bear image during the inference. Or the bee
-image does not have an impact on the classification of the dog image, etc. Therefore,
-the level of surprise should be calculated separately for each input and summed to
-measure the overall surprise level we experience after the images are classified by the
-model. <br class='newline' />
-</p><!-- l. 55 --><p class='indent'>   One very simple way to do this is to take the logarithm of the product of multiple
-probabilities like the one below. <br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-
-<!-- l. 57 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'> <mo class='MathClass-bin' stretchy='false'>−</mo><mtext class='qopname'> log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --> <mrow><mo fence='true' form='prefix'> (</mo><mrow><msup><mrow><mrow><mo fence='true' form='prefix'> (</mo><mrow><munderover accent='false' accentunder='false'><mrow><mo>∏</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mo fence='true' form='postfix'>)</mo></mrow></mrow><mrow> <mfrac><mrow><mn>1</mn></mrow> 
-<mrow><mi>n</mi></mrow></mfrac> </mrow></msup></mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd><mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mfrac><mrow><mn>1</mn></mrow>
-<mrow><mi>n</mi></mrow></mfrac><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --> <mrow><mo fence='true' form='prefix'> (</mo><mrow><munderover accent='false' accentunder='false'><mrow><mo>∏</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd> <mtd columnalign='right'></mtd>
-</mtr><mtr><mtd columnalign='right'></mtd>                  <mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mfrac><mrow><mn>1</mn></mrow>
-<mrow><mi>n</mi></mrow></mfrac> <mrow><mo fence='true' form='prefix'> (</mo><mrow><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mtext class='qopname'> log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd>
-</mtr><mtr><mtd columnalign='right'></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 66 --><p class='indent'>   So the function above gives us the overall uncertainty/entropy of the system when there are
-multiple data points <!-- l. 66 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>.
-<br class='newline' />
-</p><!-- l. 68 --><p class='indent'>   Note that in the formula above, all outcomes have the same level of contribution
-to the overall surprise level. For instance, if we have a less probable event, we are
-surprised a lot but considering that this event won’t happen frequently, it
-shouldn’t dominate the overall surprise level. But with the formula above, it
-does. Therefore, we should incorporate the probability of the events as well.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 70 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'> <mo class='MathClass-bin' stretchy='false'>−</mo> <mfrac><mrow><mn>1</mn></mrow> 
-<mrow><mi>n</mi></mrow></mfrac> <mrow><mo fence='true' form='prefix'> (</mo><mrow><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 77 --><p class='indent'>   Since we take the probabilities of the events into account, this might
-be the best way to incorporate all the surprise levels. But the thing is
-the formula above represents the entropy in one (true) distribution
-<!-- l. 77 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>. So,
-what if we want to compare the entropies of two separate distributions, or in other
-words, cross-entropy ? <br class='newline' />
-</p><!-- l. 79 --><p class='indent'>   So if there is another distribution out there and the probability of observing
-<!-- l. 79 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math> using that distribution
-
-is denoted as <!-- l. 79 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
-we can compute the cross-entropy between the true distribution and predicted
-distribution by manipulating the entropy formula that we wrote above. <br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 81 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>KLD</mi></mtd><mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>                    <mtd columnalign='right'></mtd>
-</mtr><mtr><mtd columnalign='right'></mtd>     <mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --> <mrow><mo fence='true' form='prefix'> (</mo><mrow><mfrac><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow>
-<mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-</mtr><mtr><mtd columnalign='right'></mtd>     <mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-</mtr><mtr><mtd columnalign='right'></mtd>     <mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 90 --><p class='indent'>   The formula above is also called Kullback-Leibler (KL) Divergence. It calculates
-the difference between two probability distributions and how close they are. In other
-words, it measures how much information is lost when we use the probabilities of
-<!-- l. 90 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> to approximate the
-true probabilities <!-- l. 90 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-<br class='newline' />
-</p><!-- l. 92 --><p class='indent'>   Note that the only variable in the formula above is
-<!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> since the probability
-of observing <!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>,
-<!-- l. 92 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, is
-fixed and does not change. For instance, probability of observing head in
-the coin is always 0.5. Even if you go to the other side of the world, it is
-always 0.5. Therefore, we can rewrite the formula above like the one below.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-
-<!-- l. 94 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>KLD</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi mathvariant='italic'>constant</mi></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 100 --><p class='indent'>   So when we train a model and that model assigns probabilities to each data point
-<!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>,
-<!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>,
-we can measure how close these probabilities are to the true probabilities
-<!-- l. 100 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> by
-using the formula above. And because our goal will be to minimize the difference
-between the predicted probabilities and true probabilities, and constant won’t have
-any effect during this optimization, we can remove the constant part and calculate
-the cross-entropy with the formula below. <br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 102 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>CE</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 108 --><p class='indent'>   We call this formula cross-entropy. But the thing is, the probabilities we use may
-not be very accurate if they are produced by a machine learning model. Therefore,
-using the probabilities generated by machine learning model to compute the overall
-surprise level we experience might not be the best method. Because if the parameters
-of our machine learning model are not optimal, the model may not assign the most
-accurate probabilities to events and computing the entropy with inaccurate
-probabilities is not ideal. That’s why we should incorporate the parameters of our
-model as well when we calculate the overall surprise level we experience.
-<br class='newline' />
-</p><!-- l. 110 --><p class='indent'>   To do this, we can use the concept of likelihood instead of probability. Probability
-refers to the chance of a specific event occurring. And likelihood is a measure of
-how plausible the set of model parameters are, given that the specific event
-occurred. For instance, let’s say that we have some information about the
-current date, temperature outside, location, etc. We want to predict the
-probability of observing rain tomorrow. Here, probability is the measure
-of how likely it is to rain tomorrow given the fact that we are currently
-in New York, in summer, today was sunny, etc. Likelihood, on the other
-hand, is a function of the model parameters and the observed data and it
-represents the likelihood of observing the given data if the model with those
-parameter values is true. The model parameters that maximize this likelihood are
-considered the best fit for the model given the data. We can write likelihood with
-<!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>L</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>. Here
-<!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜃</mi></math>
-represents the set of parameters of the model and
-<!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>
-represents the observed data (whether the weather is rainy or not).
-<!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>L</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>|</mo><mi>x</mi><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-represents the likelihood of the model parameters
-<!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜃</mi></math> given the
-observed data <!-- l. 110 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>x</mi></math>.
-<br class='newline' />
-</p><!-- l. 112 --><p class='indent'>   Suppose it is winter, and the daily temperature has been around 0<span class='tcrm-1000'>°</span>F for
-the last 30 days. If our model assigns a high probability to summer-like
-temperatures, this would indicate a low likelihood, given the observed
-winter temperatures. Thus, likelihood helps us evaluate the suitability of
-our model parameters based on the observed data. And finding the model
-parameters that maximizes the likelihood, and that makes the observed data
-<!-- l. 112 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math> most
-probable under the assumed model is called maximum likelihood estimation.<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-
-<!-- l. 114 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>CE</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>∣</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>∣</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 120 --><p class='indent'>   The formula above is also called negative log likelihood. In the likelihood function,
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mi>𝜃</mi></math> represents the parameters
-of the model and <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math> represents
-the observed data. And <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>∣</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-represents how likely it is to observe the data
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-with the model parameters with one distribution and
-<!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><mi>𝜃</mi><mo class='MathClass-rel' stretchy='false'>∣</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> represents how likely it
-is to observe the data <!-- l. 120 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-with the model parameters with another separate distribution. <br class='newline' />
-</p><!-- l. 122 --><p class='indent'>   If we have a machine learning model and that model assigns the probabilities of
-<!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> to observing
-data <!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub></math>
-while the real probability of observing these data is
-<!-- l. 122 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>, we
-can measure the overall performance of the model and optimize the parameters of the
-model in such a way that decreases the difference between the true probabilities and
-predicted probabilities with this formula. <br class='newline' />
-</p><!-- l. 124 --><p class='indent'>   Once we find the parameters with maximum likelihood estimation and once
-we ensure that the model parameters are optimal and reliable, we can use
-probability instead of likelihood and measure the predictability/certainty
-of the the predicted probabilities with the most optimal model we found.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-
-<!-- l. 126 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>CE</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 132 --><p class='indent'>   If there are only 2 distinct labels in our data in total, we can write the probability
-like the one below. <br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 134 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mrow><mo fence='true' form='prefix'> {</mo><mrow> <mtable align='axis' class='array' columnlines='none' displaystyle='true' equalcolumns='false' equalrows='false' style=''> <mtr class='array-row'><mtd class='array-td' columnalign='left'><mi>p</mi>    <mspace class='quad' width='1em'></mspace></mtd><mtd class='array-td' columnalign='left'><mstyle class='text'><mtext>if </mtext></mstyle><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>1</mn></mtd>
-</mtr>  <mtr class='array-row'><mtd class='array-td' columnalign='left'><mn>1</mn> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>p</mi><mspace class='quad' width='1em'></mspace></mtd><mtd class='array-td' columnalign='left'><mstyle class='text'><mtext>if </mtext></mstyle><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn></mtd></mtr> <!-- @{}l@{\quad }l@{} --></mtable>                                                                                    </mrow><mo fence='true' form='postfix'></mo></mrow>
-</mrow></math></td></tr></table>
-<!-- l. 142 --><p class='indent'>   In that case, we can rewrite the cross-entropy formula like the one below.
-<br class='newline' />
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 144 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>CE</mi></mtd><mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>          <mtd columnalign='right'></mtd>
-</mtr><mtr><mtd columnalign='right'><mspace class='nbsp' width='0.33em'></mspace></mtd>   <mtd columnalign='left'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><mi>p</mi><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>1</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>−</mo> <mo class='MathClass-open' stretchy='false'>(</mo><mn>1</mn> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>p</mi><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mo class='MathClass-open' stretchy='false'>(</mo><mn>1</mn> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mn>2</mn></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-
-<!-- l. 151 --><p class='indent'>   And we call this formula binary cross-entropy. <br class='newline' />
-</p><!-- l. 153 --><p class='indent'>   When we use the loss function like the one above, we update the parameters
-of the model if there is a large difference between the actual probability
-<!-- l. 153 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> and the predicted
-probability <!-- l. 153 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>.
-But the issue is that the larger this difference, the more penalize the model.
-</p>
-   <table class='equation-star'><tr><td>
-<!-- l. 155 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-<mtable class='aligned'><mtr><mtd columnalign='right'><mi mathvariant='italic'>CE</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>
-   </mtr>                                                               </mtable>
-</mrow></math></td></tr></table>
-<!-- l. 161 --><p class='indent'>   Sometimes, we may want to penalize the parameters (weights) of the
-model more directly to prevent them becoming very large and make them
-smoother. To do this, we can add the sum of squares of all model parameters.
-Through this way, if there is a big difference between the predicted probability
-<!-- l. 161 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math> and
-<!-- l. 161 --><math display='inline' xmlns='http://www.w3.org/1998/Math/MathML'><mrow><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mrow></math>
-and if the system want to make drastic updates on the parameters of the
-model as a result of this, the sum of squares of model parameters won’t allow
-this because large weights now increase the value of the loss function and
-therefore should be avoided. This is called regularization and there are two
-types of regularization: L1 and L2. The function below is an example of L2
-regularization.
-</p>
-   <table class='equation'><tr><td>
-<!-- l. 163 --><p class='indent'>
-
-</p><!-- l. 163 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-            <mstyle class='label' id='x1-1001r1'></mstyle><!-- endlabel --><mi mathvariant='italic'>Loss</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>λ</mi><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>j</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>M</mi></mrow></munderover><msup><mrow><msub><mrow><mi>W</mi></mrow><mrow>
-<mi>j</mi></mrow></msub></mrow><mrow><mn>2</mn></mrow></msup>
-</mrow></math></td><td class='eq-no'>(1)</td></tr></table>
-<!-- l. 167 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
-</p>
-   <table class='equation'><tr><td>
-<!-- l. 169 --><p class='indent'>
-</p><!-- l. 169 --><math class='equation' display='block' xmlns='http://www.w3.org/1998/Math/MathML'><mrow>
-            <mstyle class='label' id='x1-1002r2'></mstyle><!-- endlabel --><mi mathvariant='italic'>Loss</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mo class='MathClass-bin' stretchy='false'>−</mo><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>i</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>N</mi></mrow></munderover><mi>p</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow>
-<mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mtext class='qopname'>log</mtext><mo> ⁡<!-- FUNCTION APPLICATION --> </mo><!-- nolimits --><mi>q</mi><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>x</mi></mrow><mrow><mi>i</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>λ</mi><munderover accent='false' accentunder='false'><mrow><mo>∑</mo>
-  </mrow><mrow><mi>j</mi><mo class='MathClass-rel' stretchy='false'>=</mo><mn>1</mn></mrow><mrow><mi>M</mi></mrow></munderover><mo class='MathClass-rel' stretchy='false'>|</mo><msub><mrow><mi>W</mi></mrow><mrow>
-<mi>j</mi></mrow></msub><mo class='MathClass-rel' stretchy='false'>|</mo>
-</mrow></math></td><td class='eq-no'>(2)</td></tr></table>
-<!-- l. 173 --><p class='noindent'>
-</p>
-   <h3 class='likesectionHead' id='bleu'><a id='x1-2000'></a>BLEU</h3>
-<!-- l. 175 --><p class='noindent'>
-</p>
-   <h3 class='likesectionHead' id='rouge'><a id='x1-3000'></a>Rouge</h3>
-<!-- l. 177 --><p class='noindent'>
-</p>
-   <h3 class='likesectionHead' id='aicbic'><a id='x1-4000'></a>AIC/BIC</h3>
-<!-- l. 179 --><p class='noindent'>
-</p>
-   <h3 class='likesectionHead' id='silhoutte-score'><a id='x1-5000'></a>Silhoutte Score</h3>
-    
-</body> 
-</html>
+   <!-- l. 10 --><p class='noindent'>Entropy can be defined as the uncertainty, unpredictability, randomness or disorder
+   in a set of possible outcomes. <br class='newline' />
+   </p><!-- l. 12 --><p class='indent'>   When we build a machine learning model and the model assigns probabilities
+   to some scenarios, if the model is not very sure about its predictions, this
+   means that the unpredictability and randomness in the model’s predictions
+   is high. But we wouldn’t want that. We want our model to be sure and
+   certain about its predictions. And because of that, when we build a model, we
+   should update the parameters of this model so that we can reduce the overall
+   uncertainty and randomness, in other words entropy, of these predictions. But how
+   do we represent this unpredictability and randomness mathematically ?
+   <br class='newline' />
+   </p><!-- l. 14 --><p class='indent'>   One way to measure unpredictability of an outcome is to measure how much we
+   are surprised after observing that outcome. Because if the outcome is highly
+   predictable, unpredictability is low and we don’t tend to surprise that much after
+   observing that outcome. If the outcome is not predictable and if we observe that
+   outcome, we tend to surprise. Therefore, if we can be able to calculate how much
+   we surprise after observing an outcome, we can see this surprise level as
+   unpredictability. Now the question is: how do we express the level of surprise ?
+   <br class='newline' />
+   </p><!-- l. 16 --><p class='indent'>   The simplest way to express the level of surprise mathematically is using the
+   negative probability of the outcome. Because if we observe data point \(x\), for instance,
+   and if we show the probability of observing data point \(x\) with \(p(x)\), we tend to be more
+   surprised after observing data \(x\) if the probability of observing data \(x\) is low. And if the
+   probability of observing data \(x\) is high, we tend to be less surprised after observing
+   data \(x\). <br class='newline' />
+   </p><!-- l. 18 --><p class='indent'>   If we press a light switch, for example, the probability of the light turning on is
+   very high. Therefore, we are not surprised at all when we observe that the light is on
+   after pressing the switch. However, if the light does not turn on, we are quite
+   surprised since this is not an expected situation. <br class='newline' />
+   </p><!-- l. 20 --><p class='indent'>   We can express this dynamic mathematically is by using the formula
+   below.
+   </p><!-- l. 26 --><p class='indent'>   \[ \begin {aligned} - p(x) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 28 --><p class='indent'>   Because as \(p(x)\) increases, the value of \(p(x)\) decreases. And as \(p(x)\) decreases, the value of \(p(x)\)
+   increases. In other words, as the probability of observing data \(x\) increases, the surprise
+   we experience after observing \(x\) will decrease and as the probability of observing data \(x\)
+   decreases, the surprise we experience after observing \(x\) will increase because it is an
+   unlikely event for us. <br class='newline' />
+   </p><!-- l. 30 --><p class='indent'>   But what if we observe multiple outcomes \(x_i\) ? Let’s say that we have a machine
+   
+   learning model that takes 3 images as input. And let’s assume that the 1st image is
+   about a dog, the 2nd image is about a bear and the 3rd image is about a
+   bee. In total, there are 3 classes (dog, bear, and bee) and let’s assume that
+   the model assigns different probabilities to these 3 classes for each image.
+   <br class='newline' />
+   </p><!-- l. 32 --><p class='indent'>   If the model assigns the probability of 0.75 to the dog class in the 1st image, the
+   probability of 0.6 to the bear class in the 2nd image and the probability of 0.4 to the
+   bee class in the 3rd image, we can calculate the probability of classifying
+   1st image as dog AND classifying 2nd image as bear AND classifying 3rd
+   image as bee by multiplying these probabilities with the formula below.
+   <br class='newline' />
+   </p><!-- l. 36 --><p class='indent'>   \[ \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
+   </p><!-- l. 38 --><p class='indent'>   Previously, we mentioned that if there is a single outcome and the probability of \(p(x)\)
+   is assigned to this outcome \(x\), we can express the level of surprise by using \(-p(x)\). If we
+   apply the same logic in here, when there are multiple outcomes, we can measure the
+   overall surprise level by taking the negative of the product of probabilities.
+   <br class='newline' />
+   </p><!-- l. 42 --><p class='indent'>   \[ - \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
+   </p><!-- l. 44 --><p class='indent'>   So if we turn back to the image classification example, the formula above
+   attempts to measure the level of surprise we will experience after seeing
+   that the model classified the 1st image as dog with 0.75 probability, 2nd
+   image as bear with 0.6 probability and 3rd image as bee with 0.4 probability.
+   <br class='newline' />
+   </p><!-- l. 46 --><p class='indent'>   However, there are some issues with this method. First of all, multiplication
+   of many probabilities that are between 0 and 1 will result in a very small
+   number. For instance, if we multiply 0.75, 0.6, 0.4, the result will be 0.18
+   which does not represent the combined effect of using 0.75, 0.6, and 0.4
+   together. To handle this issue, we can simply take the log(.) of this operation.
+   <br class='newline' />
+   </p><!-- l. 53 --><p class='indent'>   \[ \begin {aligned} -\log \left ( \prod _{i=1}^{n} p(x_i)\right ) &amp;= - \sum _ {i=1}^{n} \log p(x_i) \\ \end {aligned} \] <br class='newline' />
+   </p><!-- l. 55 --><p class='indent'>   But there is still an issue with this formula. What if, for instance, we have
+   thousands of outcomes ? The sum of their negative log probabilities is not
+   intuitive and it makes it difficult to compare with other scenarios. To solve
+   this issue, we can simply take the average of this by dividing the result by
+   \(\frac {1}{n}\)
+   </p><!-- l. 61 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} \log p(x_i) \right ) \\ \end {aligned} \] <br class='newline' />
+   </p><!-- l. 64 --><p class='indent'>   So the function above gives us the overall uncertainty/entropy of the system when
+   
+   there are multiple data points \(x_i\). <br class='newline' />
+   </p><!-- l. 66 --><p class='indent'>   But note that in the formula above, all outcomes have the same level of
+   contribution to the overall surprise level. For instance, if we have a less probable
+   event, we are surprised a lot but considering that this event won’t happen frequently,
+   it shouldn’t dominate the overall surprise level. But with the formula above, it
+   does. Therefore, we should incorporate the probability of the events as well.
+   <br class='newline' />
+   </p><!-- l. 72 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) \log p(x_i) \right ) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 75 --><p class='indent'>   Since we take the probabilities of the events into account, this might be the best
+   way to incorporate all the surprise levels. But the thing is the formula above
+   represents the entropy in one distribution (\(p(x)\)). So, what if we want to compare the
+   entropies of two separate distributions, or in other words, cross-entropy ?
+   <br class='newline' />
+   </p><!-- l. 77 --><p class='indent'>   If there is another distribution out there and the probability of observing \(x_i\) using
+   that distribution is denoted as \(q(x_i)\), we can compute the cross-entropy between this
+   distribution (\(q(x_i)\)) and other distribution (\(p(x_i)\)) by manipulating the entropy formula that we
+   wrote above. <br class='newline' />
+   </p><!-- l. 86 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{n} p(x_i) \log p(x_i) \\ &amp; = - \sum _{i=1}^{n} p(x_i) \log \left ( \frac {p(x_i)}{q(x_i)} \right ) q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log p(x_i) - \sum _{i=1}^{n} p(x_i) \log q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log q(x_i) - \sum _{i=1}^{n} p(x_i) \log p(x_i) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 88 --><p class='indent'>   The formula above is also called Kullback-Leibler (KL) Divergence. It calculates
+   the difference between two probability distributions and how close they are. In other
+   words, it measures how much information is lost when we use the probabilities of \(q(x_i)\) to
+   approximate the true probabilities \(p(x_i)\). <br class='newline' />
+   </p><!-- l. 90 --><p class='indent'>   Typically, this formula is used to check how much the probability distribution we
+   obtain by training a model is different from the true probability distribution, and the
+   model parameters are updated accordingly based on this difference. When we use the
+   formula above for this purpose, the only variable becomes \(q(x_i)\) since the probability of
+   observing \(x_i\), with true probability distribution \(p(x_i)\), is fixed and does not change because
+   we accept it as true. For instance, the probability of observing the head in
+   the coin is always 0.5. Even if you go to the other side of the world, it is
+   always 0.5. Therefore, we can rewrite the formula above like the one below.
+   <br class='newline' />
+   </p><!-- l. 96 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) + constant \end {aligned} \]<br class='newline' />
+   </p><!-- l. 98 --><p class='indent'>   So when we train a model and that model assigns probabilities to each
+   data point \(x_i\), \(q(x_i)\), we can measure how close these probabilities are to the true
+   probabilities \(p(x_i)\) by using the formula above. And because our goal will be to minimize
+   the difference between the predicted probabilities and true probabilities,
+   and constant won’t have any effect during this optimization, we can remove
+   
+   the constant part and calculate the cross-entropy with the formula below.
+   <br class='newline' />
+   </p><!-- l. 104 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 106 --><p class='indent'>   We call this formula cross-entropy. But the thing is, the probabilities we use may
+   not be very accurate if they are produced by a machine learning model. Therefore,
+   using the probabilities generated by machine learning model to compute the overall
+   surprise level we experience might not be the best method. Because if the parameters
+   of our machine learning model are not optimal, the model may not assign the most
+   accurate probabilities to events and computing the entropy with inaccurate
+   probabilities is not ideal. That’s why we should incorporate the parameters of our
+   model as well when we calculate the overall surprise level we experience.
+   <br class='newline' />
+   </p><!-- l. 108 --><p class='indent'>   To do this, we can use the concept of likelihood instead of probability. Probability
+   refers to the chance of a specific event occurring. And likelihood is a measure of
+   how plausible the set of model parameters are, given that the specific event
+   occurred. For instance, let’s say that we have some information about the
+   current date, temperature outside, location, etc. We want to predict the
+   probability of observing rain tomorrow. Here, probability is the measure
+   of how likely it is to rain tomorrow given the fact that we are currently
+   in New York, in summer, today was sunny, etc. Likelihood, on the other
+   hand, is a function of the model parameters and the observed data and
+   it represents the likelihood of observing the given data if the model with
+   those parameter values is true. The model parameters that maximize this
+   likelihood are considered the best fit for the model given the data. We can
+   write likelihood with \(L(\theta | x)\). Here \(\theta \) represents the set of parameters of the model
+   and \(x\) represents the observed data (whether the weather is rainy or not). \(L(\theta | x)\)
+   represents the likelihood of the model parameters \(\theta \) given the observed data \(x\).
+   <br class='newline' />
+   </p><!-- l. 110 --><p class='indent'>   Suppose it is winter, and the daily temperature has been around 0<span class='tcrm-1000'>°</span>F for the last
+   30 days. If our model assigns a high probability to summer-like temperatures, this
+   would indicate a low likelihood, given the observed winter temperatures. Thus,
+   likelihood helps us evaluate the suitability of our model parameters based on the
+   observed data. And finding the model parameters that maximizes the likelihood, and
+   that makes the observed data \(x_i\) most probable under the assumed model is called
+   maximum likelihood estimation.<br class='newline' />
+   </p><!-- l. 116 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(\theta \mid x_i) \log q(\theta \mid x_i) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 118 --><p class='indent'>   The formula above is also called negative log likelihood. In the likelihood
+   function, \(\theta \) represents the parameters of the model and \(x_i\) represents the observed
+   data. And \(p(\theta \mid {x_i})\) represents how likely it is to observe the data \(x_i\) with the model
+   parameters with one distribution and \(q(\theta \mid {x_i})\) represents how likely it is to observe
+   
+   the data \(x_i\) with the model parameters with another separate distribution.
+   <br class='newline' />
+   </p><!-- l. 120 --><p class='indent'>   If we have a machine learning model and that model assigns the probabilities of \(q(x_i)\)
+   to observing data \(x_i\) while the real probability of observing these data is \(p(x_i)\), we can
+   measure the overall performance of the model and optimize the parameters of the
+   model in such a way that decreases the difference between the true probabilities and
+   predicted probabilities with this formula. <br class='newline' />
+   </p><!-- l. 122 --><p class='indent'>   Once we find the parameters with maximum likelihood estimation and once
+   we ensure that the model parameters are optimal and reliable, we can use
+   probability instead of likelihood and measure the predictability/certainty
+   of the the predicted probabilities with the most optimal model we found.
+   <br class='newline' />
+   </p><!-- l. 128 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 130 --><p class='indent'>   If there are only 2 distinct labels in our data in total, we can write the probability
+   like the one below. <br class='newline' />
+   </p><!-- l. 138 --><p class='indent'>   \[ p(x_i) = \begin {cases} p &amp; \text {if } x_i = 1 \\ 1 - p &amp; \text {if } x_i = 0 \end {cases} \]
+   </p><!-- l. 140 --><p class='indent'>   In that case, we can rewrite the cross-entropy formula like the one below.
+   <br class='newline' />
+   </p><!-- l. 147 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{N} p(x_i) \log q(x_i) \\\
+   &amp; = - p \log q(x_1) - (1-p) \log (1-q(x_2)) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 149 --><p class='indent'>   And we call this formula binary cross-entropy. <br class='newline' />
+   </p><!-- l. 151 --><p class='indent'>   When we use the loss function like the one above, we update the parameters of
+   the model if there is a large difference between the actual probability \(p(x_i)\) and the
+   predicted probability \(q(x_i)\). But the issue is that the larger this difference, the more
+   penalize the model.
+   </p><!-- l. 157 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+   </p><!-- l. 159 --><p class='indent'>   Sometimes, we may want to penalize the parameters (weights) of the model more
+   directly to prevent them becoming very large and make them smoother. To
+   do this, we can add the sum of squares of all model parameters. Through
+   this way, if there is a big difference between the predicted probability \(p(x_i)\) and \(q(x_i)\)
+   and if the system want to make drastic updates on the parameters of the
+   model as a result of this, the sum of squares of model parameters won’t allow
+   this because large weights now increase the value of the loss function and
+   therefore should be avoided. This is called regularization and there are two
+   types of regularization: L1 and L2. The function below is an example of L2
+   regularization.
+   </p><!-- l. 163 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} {W_j}^2  \end {equation*} <br class='newline' />
+   
+   </p><!-- l. 165 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
+   </p><!-- l. 169 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} |W_j|  \end {equation*}
+   </p>
+       
+   </body> 
+   </html>
