@@ -6,262 +6,263 @@
 <meta content='width=device-width,initial-scale=1' name='viewport' /> 
 <link href='main.css' rel='stylesheet' type='text/css' /> 
 <meta content='main.tex' name='src' /> 
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Dreaming</title>
-   <style>
-       body {
-           font-family: Avenir, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-           line-height: 1.5;
-           max-width: 650px;
-           margin: 0;
-           padding: 2rem;
-           color: #1a1a1a;
-           font-size: 0.85rem;
-       }
-
-       .nav {
-           margin-bottom: 2rem;
-       }
-
-       .nav a {
-           color: #1a1a1a;
-           text-decoration: none;
-           margin-right: 1.5rem;
-           font-size: 0.85rem;
-       }
-
-       .nav a:hover {
-           text-decoration: underline;
-           text-decoration-thickness: 1px;
-           text-underline-offset: 2px;
-       }
-
-       .nav a.active {
-           text-decoration: underline;
-       }
-
-       a {
-           color: #1a1a1a;
-           text-decoration: underline;
-           text-decoration-thickness: 1px;
-           text-underline-offset: 2px;
-       }
-
-       p {
-           margin-bottom: 1.5rem;
-       }
-
-       .reference {
-           margin-top: 1.5rem;
-           font-size: 0.85rem;
-       }
-
-       .author {
-           font-weight: 700;  /* Made bolder - 700 instead of 600 */
-       }        
-   </style>
-</head>
- <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js' type='text/javascript'></script>  
+<script>window.MathJax = { tex: { tags: "ams", }, }; </script> 
+ <script async='async' id='MathJax-script' src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js' type='text/javascript'></script>  
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreaming</title>
+    <style>
+        body {
+            font-family: Avenir, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.5;
+            max-width: 650px;
+            margin: 0;
+            padding: 2rem;
+            color: #1a1a1a;
+            font-size: 0.85rem;
+        }
+ 
+        .nav {
+            margin-bottom: 2rem;
+        }
+ 
+        .nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-size: 0.85rem;
+        }
+ 
+        .nav a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+ 
+        .nav a.active {
+            text-decoration: underline;
+        }
+ 
+        a {
+            color: #1a1a1a;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+ 
+        p {
+            margin-bottom: 1.5rem;
+        }
+ 
+        .reference {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+ 
+        .author {
+            font-weight: 700;  /* Made bolder - 700 instead of 600 */
+        }        
+    </style>
+ </head> 
 </head><body>
-   <!-- l. 10 --><p class='noindent'>Entropy can be defined as the uncertainty, unpredictability, randomness or disorder
-   in a set of possible outcomes. <br class='newline' />
-   </p><!-- l. 12 --><p class='indent'>   When we build a machine learning model and the model assigns probabilities
-   to some scenarios, if the model is not very sure about its predictions, this
-   means that the unpredictability and randomness in the model’s predictions
-   is high. But we wouldn’t want that. We want our model to be sure and
-   certain about its predictions. And because of that, when we build a model, we
-   should update the parameters of this model so that we can reduce the overall
-   uncertainty and randomness, in other words entropy, of these predictions. But how
-   do we represent this unpredictability and randomness mathematically ?
-   <br class='newline' />
-   </p><!-- l. 14 --><p class='indent'>   One way to measure unpredictability of an outcome is to measure how much we
-   are surprised after observing that outcome. Because if the outcome is highly
-   predictable, unpredictability is low and we don’t tend to surprise that much after
-   observing that outcome. If the outcome is not predictable and if we observe that
-   outcome, we tend to surprise. Therefore, if we can be able to calculate how much
-   we surprise after observing an outcome, we can see this surprise level as
-   unpredictability. Now the question is: how do we express the level of surprise ?
-   <br class='newline' />
-   </p><!-- l. 16 --><p class='indent'>   The simplest way to express the level of surprise mathematically is using the
-   negative probability of the outcome. Because if we observe data point \(x\), for instance,
-   and if we show the probability of observing data point \(x\) with \(p(x)\), we tend to be more
-   surprised after observing data \(x\) if the probability of observing data \(x\) is low. And if the
-   probability of observing data \(x\) is high, we tend to be less surprised after observing
-   data \(x\). <br class='newline' />
-   </p><!-- l. 18 --><p class='indent'>   If we press a light switch, for example, the probability of the light turning on is
-   very high. Therefore, we are not surprised at all when we observe that the light is on
-   after pressing the switch. However, if the light does not turn on, we are quite
-   surprised since this is not an expected situation. <br class='newline' />
-   </p><!-- l. 20 --><p class='indent'>   We can express this dynamic mathematically is by using the formula
-   below.
-   </p><!-- l. 26 --><p class='indent'>   \[ \begin {aligned} - p(x) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 28 --><p class='indent'>   Because as \(p(x)\) increases, the value of \(p(x)\) decreases. And as \(p(x)\) decreases, the value of \(p(x)\)
-   increases. In other words, as the probability of observing data \(x\) increases, the surprise
-   we experience after observing \(x\) will decrease and as the probability of observing data \(x\)
-   decreases, the surprise we experience after observing \(x\) will increase because it is an
-   unlikely event for us. <br class='newline' />
-   </p><!-- l. 30 --><p class='indent'>   But what if we observe multiple outcomes \(x_i\) ? Let’s say that we have a machine
-   
-   learning model that takes 3 images as input. And let’s assume that the 1st image is
-   about a dog, the 2nd image is about a bear and the 3rd image is about a
-   bee. In total, there are 3 classes (dog, bear, and bee) and let’s assume that
-   the model assigns different probabilities to these 3 classes for each image.
-   <br class='newline' />
-   </p><!-- l. 32 --><p class='indent'>   If the model assigns the probability of 0.75 to the dog class in the 1st image, the
-   probability of 0.6 to the bear class in the 2nd image and the probability of 0.4 to the
-   bee class in the 3rd image, we can calculate the probability of classifying
-   1st image as dog AND classifying 2nd image as bear AND classifying 3rd
-   image as bee by multiplying these probabilities with the formula below.
-   <br class='newline' />
-   </p><!-- l. 36 --><p class='indent'>   \[ \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
-   </p><!-- l. 38 --><p class='indent'>   Previously, we mentioned that if there is a single outcome and the probability of \(p(x)\)
-   is assigned to this outcome \(x\), we can express the level of surprise by using \(-p(x)\). If we
-   apply the same logic in here, when there are multiple outcomes, we can measure the
-   overall surprise level by taking the negative of the product of probabilities.
-   <br class='newline' />
-   </p><!-- l. 42 --><p class='indent'>   \[ - \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
-   </p><!-- l. 44 --><p class='indent'>   So if we turn back to the image classification example, the formula above
-   attempts to measure the level of surprise we will experience after seeing
-   that the model classified the 1st image as dog with 0.75 probability, 2nd
-   image as bear with 0.6 probability and 3rd image as bee with 0.4 probability.
-   <br class='newline' />
-   </p><!-- l. 46 --><p class='indent'>   However, there are some issues with this method. First of all, multiplication
-   of many probabilities that are between 0 and 1 will result in a very small
-   number. For instance, if we multiply 0.75, 0.6, 0.4, the result will be 0.18
-   which does not represent the combined effect of using 0.75, 0.6, and 0.4
-   together. To handle this issue, we can simply take the log(.) of this operation.
-   <br class='newline' />
-   </p><!-- l. 53 --><p class='indent'>   \[ \begin {aligned} -\log \left ( \prod _{i=1}^{n} p(x_i)\right ) &amp;= - \sum _ {i=1}^{n} \log p(x_i) \\ \end {aligned} \] <br class='newline' />
-   </p><!-- l. 55 --><p class='indent'>   But there is still an issue with this formula. What if, for instance, we have
-   thousands of outcomes ? The sum of their negative log probabilities is not
-   intuitive and it makes it difficult to compare with other scenarios. To solve
-   this issue, we can simply take the average of this by dividing the result by
-   \(\frac {1}{n}\)
-   </p><!-- l. 61 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} \log p(x_i) \right ) \\ \end {aligned} \] <br class='newline' />
-   </p><!-- l. 64 --><p class='indent'>   So the function above gives us the overall uncertainty/entropy of the system when
-   
-   there are multiple data points \(x_i\). <br class='newline' />
-   </p><!-- l. 66 --><p class='indent'>   But note that in the formula above, all outcomes have the same level of
-   contribution to the overall surprise level. For instance, if we have a less probable
-   event, we are surprised a lot but considering that this event won’t happen frequently,
-   it shouldn’t dominate the overall surprise level. But with the formula above, it
-   does. Therefore, we should incorporate the probability of the events as well.
-   <br class='newline' />
-   </p><!-- l. 72 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) \log p(x_i) \right ) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 75 --><p class='indent'>   Since we take the probabilities of the events into account, this might be the best
-   way to incorporate all the surprise levels. But the thing is the formula above
-   represents the entropy in one distribution (\(p(x)\)). So, what if we want to compare the
-   entropies of two separate distributions, or in other words, cross-entropy ?
-   <br class='newline' />
-   </p><!-- l. 77 --><p class='indent'>   If there is another distribution out there and the probability of observing \(x_i\) using
-   that distribution is denoted as \(q(x_i)\), we can compute the cross-entropy between this
-   distribution (\(q(x_i)\)) and other distribution (\(p(x_i)\)) by manipulating the entropy formula that we
-   wrote above. <br class='newline' />
-   </p><!-- l. 86 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{n} p(x_i) \log p(x_i) \\ &amp; = - \sum _{i=1}^{n} p(x_i) \log \left ( \frac {p(x_i)}{q(x_i)} \right ) q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log p(x_i) - \sum _{i=1}^{n} p(x_i) \log q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log q(x_i) - \sum _{i=1}^{n} p(x_i) \log p(x_i) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 88 --><p class='indent'>   The formula above is also called Kullback-Leibler (KL) Divergence. It calculates
-   the difference between two probability distributions and how close they are. In other
-   words, it measures how much information is lost when we use the probabilities of \(q(x_i)\) to
-   approximate the true probabilities \(p(x_i)\). <br class='newline' />
-   </p><!-- l. 90 --><p class='indent'>   Typically, this formula is used to check how much the probability distribution we
-   obtain by training a model is different from the true probability distribution, and the
-   model parameters are updated accordingly based on this difference. When we use the
-   formula above for this purpose, the only variable becomes \(q(x_i)\) since the probability of
-   observing \(x_i\), with true probability distribution \(p(x_i)\), is fixed and does not change because
-   we accept it as true. For instance, the probability of observing the head in
-   the coin is always 0.5. Even if you go to the other side of the world, it is
-   always 0.5. Therefore, we can rewrite the formula above like the one below.
-   <br class='newline' />
-   </p><!-- l. 96 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) + constant \end {aligned} \]<br class='newline' />
-   </p><!-- l. 98 --><p class='indent'>   So when we train a model and that model assigns probabilities to each
-   data point \(x_i\), \(q(x_i)\), we can measure how close these probabilities are to the true
-   probabilities \(p(x_i)\) by using the formula above. And because our goal will be to minimize
-   the difference between the predicted probabilities and true probabilities,
-   and constant won’t have any effect during this optimization, we can remove
-   
-   the constant part and calculate the cross-entropy with the formula below.
-   <br class='newline' />
-   </p><!-- l. 104 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 106 --><p class='indent'>   We call this formula cross-entropy. But the thing is, the probabilities we use may
-   not be very accurate if they are produced by a machine learning model. Therefore,
-   using the probabilities generated by machine learning model to compute the overall
-   surprise level we experience might not be the best method. Because if the parameters
-   of our machine learning model are not optimal, the model may not assign the most
-   accurate probabilities to events and computing the entropy with inaccurate
-   probabilities is not ideal. That’s why we should incorporate the parameters of our
-   model as well when we calculate the overall surprise level we experience.
-   <br class='newline' />
-   </p><!-- l. 108 --><p class='indent'>   To do this, we can use the concept of likelihood instead of probability. Probability
-   refers to the chance of a specific event occurring. And likelihood is a measure of
-   how plausible the set of model parameters are, given that the specific event
-   occurred. For instance, let’s say that we have some information about the
-   current date, temperature outside, location, etc. We want to predict the
-   probability of observing rain tomorrow. Here, probability is the measure
-   of how likely it is to rain tomorrow given the fact that we are currently
-   in New York, in summer, today was sunny, etc. Likelihood, on the other
-   hand, is a function of the model parameters and the observed data and
-   it represents the likelihood of observing the given data if the model with
-   those parameter values is true. The model parameters that maximize this
-   likelihood are considered the best fit for the model given the data. We can
-   write likelihood with \(L(\theta | x)\). Here \(\theta \) represents the set of parameters of the model
-   and \(x\) represents the observed data (whether the weather is rainy or not). \(L(\theta | x)\)
-   represents the likelihood of the model parameters \(\theta \) given the observed data \(x\).
-   <br class='newline' />
-   </p><!-- l. 110 --><p class='indent'>   Suppose it is winter, and the daily temperature has been around 0<span class='tcrm-1000'>°</span>F for the last
-   30 days. If our model assigns a high probability to summer-like temperatures, this
-   would indicate a low likelihood, given the observed winter temperatures. Thus,
-   likelihood helps us evaluate the suitability of our model parameters based on the
-   observed data. And finding the model parameters that maximizes the likelihood, and
-   that makes the observed data \(x_i\) most probable under the assumed model is called
-   maximum likelihood estimation.<br class='newline' />
-   </p><!-- l. 116 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(\theta \mid x_i) \log q(\theta \mid x_i) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 118 --><p class='indent'>   The formula above is also called negative log likelihood. In the likelihood
-   function, \(\theta \) represents the parameters of the model and \(x_i\) represents the observed
-   data. And \(p(\theta \mid {x_i})\) represents how likely it is to observe the data \(x_i\) with the model
-   parameters with one distribution and \(q(\theta \mid {x_i})\) represents how likely it is to observe
-   
-   the data \(x_i\) with the model parameters with another separate distribution.
-   <br class='newline' />
-   </p><!-- l. 120 --><p class='indent'>   If we have a machine learning model and that model assigns the probabilities of \(q(x_i)\)
-   to observing data \(x_i\) while the real probability of observing these data is \(p(x_i)\), we can
-   measure the overall performance of the model and optimize the parameters of the
-   model in such a way that decreases the difference between the true probabilities and
-   predicted probabilities with this formula. <br class='newline' />
-   </p><!-- l. 122 --><p class='indent'>   Once we find the parameters with maximum likelihood estimation and once
-   we ensure that the model parameters are optimal and reliable, we can use
-   probability instead of likelihood and measure the predictability/certainty
-   of the the predicted probabilities with the most optimal model we found.
-   <br class='newline' />
-   </p><!-- l. 128 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 130 --><p class='indent'>   If there are only 2 distinct labels in our data in total, we can write the probability
-   like the one below. <br class='newline' />
-   </p><!-- l. 138 --><p class='indent'>   \[ p(x_i) = \begin {cases} p &amp; \text {if } x_i = 1 \\ 1 - p &amp; \text {if } x_i = 0 \end {cases} \]
-   </p><!-- l. 140 --><p class='indent'>   In that case, we can rewrite the cross-entropy formula like the one below.
-   <br class='newline' />
-   </p><!-- l. 147 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{N} p(x_i) \log q(x_i) \\\
-   &amp; = - p \log q(x_1) - (1-p) \log (1-q(x_2)) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 149 --><p class='indent'>   And we call this formula binary cross-entropy. <br class='newline' />
-   </p><!-- l. 151 --><p class='indent'>   When we use the loss function like the one above, we update the parameters of
-   the model if there is a large difference between the actual probability \(p(x_i)\) and the
-   predicted probability \(q(x_i)\). But the issue is that the larger this difference, the more
-   penalize the model.
-   </p><!-- l. 157 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
-   </p><!-- l. 159 --><p class='indent'>   Sometimes, we may want to penalize the parameters (weights) of the model more
-   directly to prevent them becoming very large and make them smoother. To
-   do this, we can add the sum of squares of all model parameters. Through
-   this way, if there is a big difference between the predicted probability \(p(x_i)\) and \(q(x_i)\)
-   and if the system want to make drastic updates on the parameters of the
-   model as a result of this, the sum of squares of model parameters won’t allow
-   this because large weights now increase the value of the loss function and
-   therefore should be avoided. This is called regularization and there are two
-   types of regularization: L1 and L2. The function below is an example of L2
-   regularization.
-   </p><!-- l. 163 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} {W_j}^2  \end {equation*} <br class='newline' />
-   
-   </p><!-- l. 165 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
-   </p><!-- l. 169 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} |W_j|  \end {equation*}
-   </p>
-       
-   </body> 
-   </html>
+<!-- l. 10 --><p class='noindent'>Entropy can be defined as the uncertainty, unpredictability, randomness or disorder
+in a set of possible outcomes. <br class='newline' />
+</p><!-- l. 12 --><p class='indent'>   When we build a machine learning model and the model assigns probabilities
+to some scenarios, if the model is not very sure about its predictions, this
+means that the unpredictability and randomness in the model’s predictions
+is high. But we wouldn’t want that. We want our model to be sure and
+certain about its predictions. And because of that, when we build a model, we
+should update the parameters of this model so that we can reduce the overall
+uncertainty and randomness, in other words entropy, of these predictions. But how
+do we represent this unpredictability and randomness mathematically ?
+<br class='newline' />
+</p><!-- l. 14 --><p class='indent'>   One way to measure unpredictability of an outcome is to measure how much we
+are surprised after observing that outcome. Because if the outcome is highly
+predictable, unpredictability is low and we don’t tend to surprise that much after
+observing that outcome. If the outcome is not predictable and if we observe that
+outcome, we tend to surprise. Therefore, if we can be able to calculate how much
+we surprise after observing an outcome, we can see this surprise level as
+unpredictability. Now the question is: how do we express the level of surprise ?
+<br class='newline' />
+</p><!-- l. 16 --><p class='indent'>   The simplest way to express the level of surprise mathematically is using the
+negative probability of the outcome. Because if we observe data point \(x\), for instance,
+and if we show the probability of observing data point \(x\) with \(p(x)\), we tend to be more
+surprised after observing data \(x\) if the probability of observing data \(x\) is low. And if the
+probability of observing data \(x\) is high, we tend to be less surprised after observing
+data \(x\). <br class='newline' />
+</p><!-- l. 18 --><p class='indent'>   If we press a light switch, for example, the probability of the light turning on is
+very high. Therefore, we are not surprised at all when we observe that the light is on
+after pressing the switch. However, if the light does not turn on, we are quite
+surprised since this is not an expected situation. <br class='newline' />
+</p><!-- l. 20 --><p class='indent'>   We can express this dynamic mathematically is by using the formula
+below.
+</p><!-- l. 26 --><p class='indent'>   \[ \begin {aligned} - p(x) \end {aligned} \] <br class='newline' />
+</p><!-- l. 28 --><p class='indent'>   Because as \(p(x)\) increases, the value of \(p(x)\) decreases. And as \(p(x)\) decreases, the value of \(p(x)\)
+increases. In other words, as the probability of observing data \(x\) increases, the surprise
+we experience after observing \(x\) will decrease and as the probability of observing data \(x\)
+decreases, the surprise we experience after observing \(x\) will increase because it is an
+unlikely event for us. <br class='newline' />
+</p><!-- l. 30 --><p class='indent'>   But what if we observe multiple outcomes \(x_i\) ? Let’s say that we have a machine
+
+learning model that takes 3 images as input. And let’s assume that the 1st image is
+about a dog, the 2nd image is about a bear and the 3rd image is about a
+bee. In total, there are 3 classes (dog, bear, and bee) and let’s assume that
+the model assigns different probabilities to these 3 classes for each image.
+<br class='newline' />
+</p><!-- l. 32 --><p class='indent'>   If the model assigns the probability of 0.75 to the dog class in the 1st image, the
+probability of 0.6 to the bear class in the 2nd image and the probability of 0.4 to the
+bee class in the 3rd image, we can calculate the probability of classifying
+1st image as dog AND classifying 2nd image as bear AND classifying 3rd
+image as bee by multiplying these probabilities with the formula below.
+<br class='newline' />
+</p><!-- l. 36 --><p class='indent'>   \[ \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
+</p><!-- l. 38 --><p class='indent'>   Previously, we mentioned that if there is a single outcome and the probability of \(p(x)\)
+is assigned to this outcome \(x\), we can express the level of surprise by using \(-p(x)\). If we
+apply the same logic in here, when there are multiple outcomes, we can measure the
+overall surprise level by taking the negative of the product of probabilities.
+<br class='newline' />
+</p><!-- l. 42 --><p class='indent'>   \[ - \prod _{i=1}^{n} p(x_i) \] <br class='newline' />
+</p><!-- l. 44 --><p class='indent'>   So if we turn back to the image classification example, the formula above
+attempts to measure the level of surprise we will experience after seeing
+that the model classified the 1st image as dog with 0.75 probability, 2nd
+image as bear with 0.6 probability and 3rd image as bee with 0.4 probability.
+<br class='newline' />
+</p><!-- l. 46 --><p class='indent'>   However, there are some issues with this method. First of all, multiplication
+of many probabilities that are between 0 and 1 will result in a very small
+number. For instance, if we multiply 0.75, 0.6, 0.4, the result will be 0.18
+which does not represent the combined effect of using 0.75, 0.6, and 0.4
+together. To handle this issue, we can simply take the log(.) of this operation.
+<br class='newline' />
+</p><!-- l. 53 --><p class='indent'>   \[ \begin {aligned} -\log \left ( \prod _{i=1}^{n} p(x_i)\right ) &amp;= - \sum _ {i=1}^{n} \log p(x_i) \\ \end {aligned} \] <br class='newline' />
+</p><!-- l. 55 --><p class='indent'>   But there is still an issue with this formula. What if, for instance, we have
+thousands of outcomes ? The sum of their negative log probabilities is not
+intuitive and it makes it difficult to compare with other scenarios. To solve
+this issue, we can simply take the average of this by dividing the result by
+\(\frac {1}{n}\)
+</p><!-- l. 61 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} \log p(x_i) \right ) \\ \end {aligned} \] <br class='newline' />
+</p><!-- l. 64 --><p class='indent'>   So the function above gives us the overall uncertainty/entropy of the system when
+
+there are multiple data points \(x_i\). <br class='newline' />
+</p><!-- l. 66 --><p class='indent'>   But note that in the formula above, all outcomes have the same level of
+contribution to the overall surprise level. For instance, if we have a less probable
+event, we are surprised a lot but considering that this event won’t happen frequently,
+it shouldn’t dominate the overall surprise level. But with the formula above, it
+does. Therefore, we should incorporate the probability of the events as well.
+<br class='newline' />
+</p><!-- l. 72 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) \log p(x_i) \right ) \end {aligned} \] <br class='newline' />
+</p><!-- l. 75 --><p class='indent'>   Since we take the probabilities of the events into account, this might be the best
+way to incorporate all the surprise levels. But the thing is the formula above
+represents the entropy in one distribution (\(p(x)\)). So, what if we want to compare the
+entropies of two separate distributions, or in other words, cross-entropy ?
+<br class='newline' />
+</p><!-- l. 77 --><p class='indent'>   If there is another distribution out there and the probability of observing \(x_i\) using
+that distribution is denoted as \(q(x_i)\), we can compute the cross-entropy between this
+distribution (\(q(x_i)\)) and other distribution (\(p(x_i)\)) by manipulating the entropy formula that we
+wrote above. <br class='newline' />
+</p><!-- l. 86 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{n} p(x_i) \log p(x_i) \\ &amp; = - \sum _{i=1}^{n} p(x_i) \log \left ( \frac {p(x_i)}{q(x_i)} \right ) q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log p(x_i) - \sum _{i=1}^{n} p(x_i) \log q(x_i) \\ &amp; = -\sum _{i=1}^{n} p(x_i) \log q(x_i) - \sum _{i=1}^{n} p(x_i) \log p(x_i) \end {aligned} \] <br class='newline' />
+</p><!-- l. 88 --><p class='indent'>   The formula above is also called Kullback-Leibler (KL) Divergence. It calculates
+the difference between two probability distributions and how close they are. In other
+words, it measures how much information is lost when we use the probabilities of \(q(x_i)\) to
+approximate the true probabilities \(p(x_i)\). <br class='newline' />
+</p><!-- l. 90 --><p class='indent'>   Typically, this formula is used to check how much the probability distribution we
+obtain by training a model is different from the true probability distribution, and the
+model parameters are updated accordingly based on this difference. When we use the
+formula above for this purpose, the only variable becomes \(q(x_i)\) since the probability of
+observing \(x_i\), with true probability distribution \(p(x_i)\), is fixed and does not change because
+we accept it as true. For instance, the probability of observing the head in
+the coin is always 0.5. Even if you go to the other side of the world, it is
+always 0.5. Therefore, we can rewrite the formula above like the one below.
+<br class='newline' />
+</p><!-- l. 96 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) + constant \end {aligned} \]<br class='newline' />
+</p><!-- l. 98 --><p class='indent'>   So when we train a model and that model assigns probabilities to each
+data point \(x_i\), \(q(x_i)\), we can measure how close these probabilities are to the true
+probabilities \(p(x_i)\) by using the formula above. And because our goal will be to minimize
+the difference between the predicted probabilities and true probabilities,
+and constant won’t have any effect during this optimization, we can remove
+
+the constant part and calculate the cross-entropy with the formula below.
+<br class='newline' />
+</p><!-- l. 104 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+</p><!-- l. 106 --><p class='indent'>   We call this formula cross-entropy. But the thing is, the probabilities we use may
+not be very accurate if they are produced by a machine learning model. Therefore,
+using the probabilities generated by machine learning model to compute the overall
+surprise level we experience might not be the best method. Because if the parameters
+of our machine learning model are not optimal, the model may not assign the most
+accurate probabilities to events and computing the entropy with inaccurate
+probabilities is not ideal. That’s why we should incorporate the parameters of our
+model as well when we calculate the overall surprise level we experience.
+<br class='newline' />
+</p><!-- l. 108 --><p class='indent'>   To do this, we can use the concept of likelihood instead of probability. Probability
+refers to the chance of a specific event occurring. And likelihood is a measure of
+how plausible the set of model parameters are, given that the specific event
+occurred. For instance, let’s say that we have some information about the
+current date, temperature outside, location, etc. We want to predict the
+probability of observing rain tomorrow. Here, probability is the measure
+of how likely it is to rain tomorrow given the fact that we are currently
+in New York, in summer, today was sunny, etc. Likelihood, on the other
+hand, is a function of the model parameters and the observed data and
+it represents the likelihood of observing the given data if the model with
+those parameter values is true. The model parameters that maximize this
+likelihood are considered the best fit for the model given the data. We can
+write likelihood with \(L(\theta | x)\). Here \(\theta \) represents the set of parameters of the model
+and \(x\) represents the observed data (whether the weather is rainy or not). \(L(\theta | x)\)
+represents the likelihood of the model parameters \(\theta \) given the observed data \(x\).
+<br class='newline' />
+</p><!-- l. 110 --><p class='indent'>   Suppose it is winter, and the daily temperature has been around 0<span class='tcrm-1000'>°</span>F for the last
+30 days. If our model assigns a high probability to summer-like temperatures, this
+would indicate a low likelihood, given the observed winter temperatures. Thus,
+likelihood helps us evaluate the suitability of our model parameters based on the
+observed data. And finding the model parameters that maximizes the likelihood, and
+that makes the observed data \(x_i\) most probable under the assumed model is called
+maximum likelihood estimation.<br class='newline' />
+</p><!-- l. 116 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(\theta \mid x_i) \log q(\theta \mid x_i) \end {aligned} \] <br class='newline' />
+</p><!-- l. 118 --><p class='indent'>   The formula above is also called negative log likelihood. In the likelihood
+function, \(\theta \) represents the parameters of the model and \(x_i\) represents the observed
+data. And \(p(\theta \mid {x_i})\) represents how likely it is to observe the data \(x_i\) with the model
+parameters with one distribution and \(q(\theta \mid {x_i})\) represents how likely it is to observe
+
+the data \(x_i\) with the model parameters with another separate distribution.
+<br class='newline' />
+</p><!-- l. 120 --><p class='indent'>   If we have a machine learning model and that model assigns the probabilities of \(q(x_i)\)
+to observing data \(x_i\) while the real probability of observing these data is \(p(x_i)\), we can
+measure the overall performance of the model and optimize the parameters of the
+model in such a way that decreases the difference between the true probabilities and
+predicted probabilities with this formula. <br class='newline' />
+</p><!-- l. 122 --><p class='indent'>   Once we find the parameters with maximum likelihood estimation and once
+we ensure that the model parameters are optimal and reliable, we can use
+probability instead of likelihood and measure the predictability/certainty
+of the the predicted probabilities with the most optimal model we found.
+<br class='newline' />
+</p><!-- l. 128 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+</p><!-- l. 130 --><p class='indent'>   If there are only 2 distinct labels in our data in total, we can write the probability
+like the one below. <br class='newline' />
+</p><!-- l. 138 --><p class='indent'>   \[ p(x_i) = \begin {cases} p &amp; \text {if } x_i = 1 \\ 1 - p &amp; \text {if } x_i = 0 \end {cases} \]
+</p><!-- l. 140 --><p class='indent'>   In that case, we can rewrite the cross-entropy formula like the one below.
+<br class='newline' />
+</p><!-- l. 147 --><p class='indent'>   \[ \begin {aligned} &amp; - \sum _{i=1}^{N} p(x_i) \log q(x_i) \\\
+&amp; = - p \log q(x_1) - (1-p) \log (1-q(x_2)) \end {aligned} \] <br class='newline' />
+</p><!-- l. 149 --><p class='indent'>   And we call this formula binary cross-entropy. <br class='newline' />
+</p><!-- l. 151 --><p class='indent'>   When we use the loss function like the one above, we update the parameters of
+the model if there is a large difference between the actual probability \(p(x_i)\) and the
+predicted probability \(q(x_i)\). But the issue is that the larger this difference, the more
+penalize the model.
+</p><!-- l. 157 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(x_i) \log q(x_i) \end {aligned} \] <br class='newline' />
+</p><!-- l. 159 --><p class='indent'>   Sometimes, we may want to penalize the parameters (weights) of the model more
+directly to prevent them becoming very large and make them smoother. To
+do this, we can add the sum of squares of all model parameters. Through
+this way, if there is a big difference between the predicted probability \(p(x_i)\) and \(q(x_i)\)
+and if the system want to make drastic updates on the parameters of the
+model as a result of this, the sum of squares of model parameters won’t allow
+this because large weights now increase the value of the loss function and
+therefore should be avoided. This is called regularization and there are two
+types of regularization: L1 and L2. The function below is an example of L2
+regularization.
+</p><!-- l. 163 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} {W_j}^2  \end {equation*} <br class='newline' />
+
+</p><!-- l. 165 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
+</p><!-- l. 169 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} |W_j|  \end {equation*}
+</p>
+    
+</body> 
+</html>
