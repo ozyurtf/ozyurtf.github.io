@@ -181,7 +181,7 @@
     
     surprise levels we experience with \(p\) and \(q\) distributions with the equation below:
     <br class='newline' />
-    </p><!-- l. 102 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) (\log p(x_i) - \log q(x_i)) \right ) \end {aligned} &amp;= - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) \log \frac {p(x_i)}{q(x_i)} \right ) \] <br class='newline' />
+    </p><!-- l. 102 --><p class='indent'>   \[ \begin {aligned} - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) (\log p(x_i) - \log q(x_i)) \right ) &amp;= - \frac {1}{n} \left ( \sum _ {i=1}^{n} p(x_i) \log \frac {p(x_i)}{q(x_i)} \right ) \end {aligned} \]
     </p><!-- l. 104 --><p class='indent'>   And this is called Kullback-Leibler (KL) Divergence. It calculates the difference
     between two probability distributions. <br class='newline' />
     </p><!-- l. 106 --><p class='indent'>   Now, let’s say that we have a machine learning model and it outputs the
@@ -218,8 +218,8 @@
     maximum likelihood estimation.<br class='newline' />
     </p><!-- l. 116 --><p class='indent'>   \[ \begin {aligned} - \sum _{i=1}^{N} p(\theta \mid x_i) \log q(\theta \mid x_i) \end {aligned} \] <br class='newline' />
     </p><!-- l. 118 --><p class='indent'>   The formula above is also called negative log-likelihood. In the likelihood
-    
     function, \(\theta \) represents the parameters of the model and \(x_i\) represents the observed
+    
     data. And \(p(\theta \mid {x_i})\) represents how likely it is to observe the data \(x_i\) with the model
     parameters with one distribution and \(q(\theta \mid {x_i})\) represents how likely it is to observe
     the data \(x_i\) with the model parameters with another separate distribution.
@@ -257,10 +257,9 @@
     therefore should be avoided. This is called regularization and there are two
     types of regularization: L1 and L2. The function below is an example of L2
     regularization.
-    
     </p><!-- l. 163 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} {W_j}^2  \end {equation*} <br class='newline' />
-    </p><!-- l. 167 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
-    </p><!-- l. 171 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} |W_j|  \end {equation*}
+    </p><!-- l. 165 --><p class='indent'>   Another way to penalize large weights is L1 regularization. <br class='newline' />
+    </p><!-- l. 169 --><p class='indent'>   \begin {equation*}  - \sum _{i=1}^{N} p(x_i) \log q(x_i) + \lambda \sum _{j=1}^{M} |W_j|  \end {equation*}
     </p>
         
     </body> 
