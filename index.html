@@ -38,12 +38,19 @@
             text-decoration: none;
             margin-right: 1.5rem;  /* This adds space between navigation items */
             font-size: 0.85rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
 
         nav a:hover {
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
+            background-color: #f0f0f0;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateY(-1px);
         }
 
         @media (max-width: 700px) {
