@@ -54,6 +54,8 @@
             max-width: 650px;
             height: auto;
             display: block;
+            /* Prevent sub-pixel edge artifacts when the PNG is scaled */
+            clip-path: inset(0 2px 2px 0);
         }
 
         @media (max-width: 700px) {
