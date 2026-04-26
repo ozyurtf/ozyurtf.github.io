@@ -62,41 +62,29 @@
             z-index: 1000;
         }
 
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            box-sizing: border-box;
-        }
-
-        .modal-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.9rem;
-            max-width: 92vw;
-        }
-
         .modal img {
             max-width: 90%;
-            max-height: 78vh;
-            border-radius: 6px;
+            max-height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .modal-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             color: #d1d5db;
-            font-size: 0.95rem;
+            font-size: 1rem;
             letter-spacing: 0.02em;
-            background: rgba(17, 24, 39, 0.78);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            padding: 0.5rem 0.9rem;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 0.45rem 0.8rem;
             border-radius: 6px;
-            text-align: center;
-            display: none;
         }
 
-        .modal-caption.show {
+        .modal.show {
             display: block;
         }
     </style>
@@ -111,18 +99,16 @@
     </div>
 
     <div class="image-grid">
-        <img src="./newton.jpeg" alt="Newton" onclick="enlargeImage(this.src, this.dataset.title || '')">
-        <img src="./einstein.jpeg" alt="Einstein" onclick="enlargeImage(this.src, this.dataset.title || '')">
-        <img src="./tesla.jpeg" alt="Tesla" data-title="2H 5th Attempt Incomplete Tesla" onclick="enlargeImage(this.src, this.dataset.title || '')">
+        <img src="./newton.jpeg" alt="Newton" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
+        <img src="./einstein.jpeg" alt="Einstein" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
+        <img src="./tesla.jpeg" alt="Tesla" data-title="2H 5th Attempt Incomplete Tesla" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
         
     </div>
 
     <!-- Modal for enlarged images -->
     <div class="modal" onclick="this.classList.remove('show')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img id="enlarged-image" src="" alt="Enlarged image">
-            <div id="modal-caption" class="modal-caption"></div>
-        </div>
+        <img id="enlarged-image" src="" alt="Enlarged image">
+        <div id="modal-caption" class="modal-caption"></div>
     </div>
 
     <script>
@@ -132,7 +118,6 @@
             const caption = document.getElementById('modal-caption');
             enlargedImg.src = src;
             caption.textContent = title;
-            caption.classList.toggle('show', Boolean(title));
             modal.classList.add('show');
         }
 
