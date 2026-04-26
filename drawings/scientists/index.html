@@ -82,6 +82,11 @@
             background: rgba(0, 0, 0, 0.55);
             padding: 0.45rem 0.8rem;
             border-radius: 6px;
+            display: none;
+        }
+
+        .modal-caption.show {
+            display: block;
         }
 
         .modal.show {
@@ -118,6 +123,7 @@
             const caption = document.getElementById('modal-caption');
             enlargedImg.src = src;
             caption.textContent = title;
+            caption.classList.toggle('show', Boolean(title));
             modal.classList.add('show');
         }
 
