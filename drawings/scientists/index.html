@@ -71,6 +71,16 @@
             transform: translate(-50%, -50%);
         }
 
+        .modal-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+        }
+
         .modal.show {
             display: block;
         }
@@ -86,20 +96,25 @@
     </div>
 
     <div class="image-grid">
-        <img src="./darwin.jpeg" alt="Darwin" onclick="enlargeImage(this.src)">
-        <img src="./newton.jpeg" alt="Newton" onclick="enlargeImage(this.src)">
+        <img src="./newton.jpeg" alt="Newton" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
+        <img src="./tesla.jpeg" alt="Tesla" data-title="2H 5th Attempt Incomplete Tesla" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
+        <img src="./einstein.jpeg" alt="Einstein" onclick="enlargeImage(this.src, this.dataset.title || this.alt)">
+        
     </div>
 
     <!-- Modal for enlarged images -->
     <div class="modal" onclick="this.classList.remove('show')">
         <img id="enlarged-image" src="" alt="Enlarged image">
+        <div id="modal-caption" class="modal-caption"></div>
     </div>
 
     <script>
-        function enlargeImage(src) {
+        function enlargeImage(src, title) {
             const modal = document.querySelector('.modal');
             const enlargedImg = document.getElementById('enlarged-image');
+            const caption = document.getElementById('modal-caption');
             enlargedImg.src = src;
+            caption.textContent = title;
             modal.classList.add('show');
         }
 
