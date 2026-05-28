@@ -64,6 +64,21 @@
             overflow-wrap: anywhere;
         }
 
+        .group-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1.8rem 0 0;
+            color: #1a1a1a;
+        }
+
+        .group-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .topics {
+            margin: 0.3rem 0 0;
+        }
+
         .highlight {
             color: #f0820e;
         }
@@ -86,15 +101,27 @@
         <a href="../drawings">Drawings</a>
     </div>
 
+    <div class="group-title">Agent Training &amp; Control</div>
     <ul class="topics">
         <li class="has-desc"><a href="./self-learning/">Self-Learning</a>: <span class="highlight">Designed</span> and <span class="highlight">developed the training process of two models</span>: one that is responsible for <span class="highlight">imagining what the state of the agent would look like in the next step</span> if it takes a specific action, and another model for <span class="highlight">determining which action should be taken in the next step to reach the target.</span> Also <span class="highlight">integrated a curriculum learning process</span> for both models to ensure that the agent starts learning from simple tasks first, before jumping to more difficult tasks.</li>
         <li class="has-desc"><a href="./decision-making/">Decision Making</a>: Implemented <span class="highlight">Behavior Cloning</span>, <span class="highlight">Goal Conditioned Behavior Cloning</span>, and <span class="highlight">Behavior Transformer</span> in a simulated environment for <span class="highlight">fixed goal</span>, <span class="highlight">changing goal</span>, and <span class="highlight">multimodal goal</span> settings, and analyzed/compared their behavior.</li>
+    </ul>
+
+    <div class="group-title">Video &amp; Motion Prediction</div>
+    <ul class="topics">
         <li class="has-desc"><a href="./continual-learning/">Energy Based Continual Learning</a>: Developing an <span class="highlight">energy</span> and <span class="highlight">optical-flow-based</span> AI model to jointly <span class="highlight">predict future video frames</span> and <span class="highlight">motion (optical flow)</span> in a sequential manner from the same hidden state.</li>
-        <li class="has-desc"><a href="./cpu-scheduler/">CPU Scheduler with C++</a>: Applied the most commonly used CPU Scheduling algorithms in C++ and explained the processes/threads, scheduling process, and synchronization.</li>
-        <li class="has-desc"><a href="./virtual-memory/">Virtual Memory with C++</a>: A C++ implementation of a virtual memory management system simulator. This project models various page replacement algorithms, including <span class="highlight">FIFO</span>, <span class="highlight">Random</span>, <span class="highlight">Clock</span>, <span class="highlight">ESC (Enhanced Second Chance)</span>, <span class="highlight">Aging</span>, and <span class="highlight">Working Set</span>.</li>
+    </ul>
+
+    <div class="group-title">RAG &amp; Agentic Pipelines / LLM-Powered Applications</div>
+    <ul class="topics">
         <li class="has-desc"><a href="./agentic-data-assistant/">Agentic Data Assistant</a>: Built an <span class="highlight">end-to-end agentic system</span> with <span class="highlight">LangGraph</span> and <span class="highlight">LangChain</span>. Also built the <span class="highlight">backend</span> that handles <span class="highlight">authentication, sessions, file management,</span> and <span class="highlight">caching</span>. <span class="highlight">Containerized the services with Docker</span>, and <span class="highlight">deployed them on AWS</span>. Currently integrating an <span class="highlight">evaluation pipeline</span> with custom LLM-as-judge evaluators to assess the system from diverse perspectives.</li>
         <li class="has-desc"><a href="./brown-assistant/">Brown Assistant</a>: Built a <span class="highlight">RAG based Q&amp;A application</span>. Implemented <span class="highlight">document chunking</span>, <span class="highlight">embedding-based vector indexing</span>, <span class="highlight">cross-encoder reranking</span>, and <span class="highlight">text generation</span> with OpenAI API. Developed FastAPI <span class="highlight">backend</span> and <span class="highlight">containerized the full stack</span> with Docker/Docker Compose and <span class="highlight">deployed on AWS</span>.</li>
-        
+    </ul>
+
+    <div class="group-title">Operating Systems Concepts</div>
+    <ul class="topics">
+        <li class="has-desc"><a href="./cpu-scheduler/">CPU Scheduler with C++</a>: Applied the most commonly used CPU Scheduling algorithms in C++ and explained the processes/threads, scheduling process, and synchronization.</li>
+        <li class="has-desc"><a href="./virtual-memory/">Virtual Memory with C++</a>: A C++ implementation of a virtual memory management system simulator. This project models various page replacement algorithms, including <span class="highlight">FIFO</span>, <span class="highlight">Random</span>, <span class="highlight">Clock</span>, <span class="highlight">ESC (Enhanced Second Chance)</span>, <span class="highlight">Aging</span>, and <span class="highlight">Working Set</span>.</li>
     </ul>
 
     <img src="../figures/destination.png" alt="Destination" class="destination-image">
