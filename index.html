@@ -30,6 +30,20 @@
             text-justify: inter-word;
             hyphens: auto;
             overflow-wrap: anywhere;
+            /* Offset the padding/border so the text stays aligned with
+               the rest of the page (matches the nav tab offset) */
+            margin-left: -10px;
+            margin-right: -10px;
+            padding: 6px 9px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            transition: border-color .18s ease, background-color .18s ease;
+        }
+
+        /* Hovering the bio draws a dark-gray rectangle filled with the Home tab color */
+        p:hover {
+            border-color: #555;
+            background-color: #8fbef4;
         }
 
         /* Add spacing between nav links */

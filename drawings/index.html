@@ -17,13 +17,23 @@
         .topics a {
             color: #1a1a1a;
             text-decoration: underline;
-            display: block; /* Makes each link take its own line */
+            display: inline-block; /* Shrink the rectangle to fit the text */
             margin-bottom: 1.5rem; /* Space between links */
             font-size: 0.85rem;
+            /* Offset the padding/border so the text stays aligned with
+               the rest of the page (matches the nav tab offset) */
+            margin-left: -10px;
+            padding: 6px 9px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            transition: border-color .18s ease, background-color .18s ease;
         }
 
+        /* Hovering an option draws a dark-gray rectangle filled with the Drawings tab color */
         .topics a:hover {
             text-decoration: none; /* Keeps underline removed on hover */
+            border-color: #555;
+            background-color: #77e93a;
         }
 
         .nav {

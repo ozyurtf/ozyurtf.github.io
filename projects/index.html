@@ -83,6 +83,20 @@
             text-justify: inter-word;
             hyphens: auto;
             overflow-wrap: anywhere;
+            /* Offset the padding/border so the text stays aligned with
+               the rest of the page (matches the nav tab offset) */
+            margin-left: -10px;
+            margin-right: -10px;
+            padding: 6px 9px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            transition: border-color .18s ease, background-color .18s ease;
+        }
+
+        /* Hovering a project draws a dark-gray rectangle filled with the Projects tab color */
+        li.has-desc:hover {
+            border-color: #555;
+            background-color: #fe7070;
         }
 
         .group-title {
@@ -102,12 +116,21 @@
 
         .highlight {
             color: #f0820e;
+            transition: color .18s ease;
+        }
+
+        /* On hover the red rectangle fills in, so drop the orange emphasis entirely */
+        li.has-desc:hover .highlight {
+            color: #1a1a1a;
         }
 
         .destination-image {
             margin-top: 3rem;
-            width: 100%;
-            max-width: 650px;
+            /* Extend a touch into the body padding so the image is a bit larger */
+            width: calc(100% + 1.5rem);
+            margin-left: -0.75rem;
+            margin-right: -0.75rem;
+            max-width: none;
             height: auto;
             display: block;
             clip-path: inset(0 2px 2px 0);
