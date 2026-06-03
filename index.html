@@ -35,6 +35,9 @@
         /* Add spacing between nav links */
         nav {
             margin: 1rem 0;
+            /* Offset the tab padding/border so the first tab's text
+               still aligns with the page content on the left */
+            margin-left: -10px;
         }
 
         nav a {
@@ -43,12 +46,22 @@
             margin-right: 1.5rem;
             /* This adds space between navigation items */
             font-size: 0.85rem;
+            padding: 4px 9px;
+            border: 1px solid transparent;
+            border-radius: 2px;
         }
 
         nav a:hover {
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
+            text-decoration: none;
+            border-color: #555;
+        }
+
+        nav a.nav-projects:hover {
+            background-color: #fe7070;
+        }
+
+        nav a.nav-drawings:hover {
+            background-color: #77e93a;
         }
 
         .domino-image {
@@ -80,8 +93,8 @@
         Models).
     </p>
     <nav>
-        <a href="./projects/">Projects</a>
-        <a href="./drawings/">Drawings</a>
+        <a href="./projects/" class="nav-projects">Projects</a>
+        <a href="./drawings/" class="nav-drawings">Drawings</a>
     </nav>
     <img src="./figures/domino-effect.png" alt="Domino effect illustration" class="domino-image">
 </body>
