@@ -35,16 +35,34 @@
             text-decoration: none;
             margin-right: 1.5rem;
             font-size: 0.85rem;
+            padding: 4px 9px;
+            border: 1px solid transparent;
+            border-radius: 2px;
         }
 
         .nav a:hover {
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
+            text-decoration: none;
+            border-color: #555;
+        }
+
+        .nav a.nav-home:hover {
+            background-color: #8fbef4;
+        }
+
+        .nav a.nav-projects:hover {
+            background-color: #fe7070;
+        }
+
+        .nav a.nav-drawings:hover {
+            background-color: #77e93a;
         }
 
         .nav a.active {
             text-decoration: underline;
+        }
+
+        .nav a.active:hover {
+            text-decoration: none;
         }
 
         a {
@@ -71,9 +89,9 @@
 </head>
 <body>
     <div class="nav">
-        <a href="../">Home</a>
-        <a href="../projects/">Projects</a>
-        <a href="../drawings/" class="active">Drawings</a>
+        <a href="../" class="nav-home">Home</a>
+        <a href="../projects/" class="nav-projects">Projects</a>
+        <a href="../drawings/" class="nav-drawings active">Drawings</a>
     </div>
 
     <ul class="topics">
