@@ -1,3 +1,6 @@
+// © 2026 Furkan Ozyurt. All Rights Reserved.
+// Unauthorized copying, reuse, or distribution of this code is prohibited.
+//
 // script.js
 // Mobile Navigation Toggle
 const burger = document.querySelector('.burger');

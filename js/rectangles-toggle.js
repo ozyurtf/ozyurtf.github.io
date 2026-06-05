@@ -1,3 +1,6 @@
+// © 2026 Furkan Ozyurt. All Rights Reserved.
+// Unauthorized copying, reuse, or distribution of this code is prohibited.
+//
 // rectangles-toggle.js
 // Adds an elegant top-right button that enables/disables the colored hover
 // rectangles across the site. The choice is saved in localStorage so it is
@@ -34,10 +37,36 @@
         '  border-radius: 2px;',
         '  border: 1px solid #555;',
         '  background: linear-gradient(135deg, #8fbef4 0 33%, #fe7070 33% 66%, #77e93a 66% 100%);',
-        '  transition: background .18s ease;',
+        '  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;',
+        '}',
+        // Hovering the toggle button gives its swatch the same thick black
+        // outline and hard offset shadow as the hover rectangles it controls.
+        '.rect-toggle:hover .rect-swatch {',
+        '  border-color: #000;',
+        '  box-shadow: 0 0 0 1px #000, 5px 5px 0 0 #000;',
         '}',
         'html.rects-off .rect-toggle .rect-swatch {',
         '  background: transparent;',
+        '}',
+        // Give every hover rectangle a thicker black outline and a hard
+        // (no-blur) offset shadow, so a solid black rectangle appears to sit
+        // behind it like a cast shadow. The 1px spread ring thickens the
+        // outline and the offset block is the shadow; using box-shadow for
+        // both means there is no layout shift on hover.
+        '.nav a:hover,',
+        'nav a:hover,',
+        'p:hover,',
+        'li.has-desc:hover,',
+        '.topics a:hover {',
+        '  border-color: #000;',
+        '  box-shadow: 0 0 0 1px #000, 5px 5px 0 0 #000;',
+        '}',
+        // The project title links live inside `li.has-desc`, which already
+        // draws its own rectangle on hover. Keep them plain so we do not get a
+        // rectangle-inside-a-rectangle.
+        'li.has-desc a:hover {',
+        '  border-color: transparent;',
+        '  box-shadow: none;',
         '}',
         // Disable every hover rectangle when turned off. Both `.nav a`
         // (inner pages) and `nav a` (home page) are covered.
@@ -48,6 +77,7 @@
         'html.rects-off .topics a:hover {',
         '  border-color: transparent;',
         '  background-color: transparent;',
+        '  box-shadow: none;',
         '}',
         // Keep the orange emphasis on projects when rectangles are off.
         'html.rects-off li.has-desc:hover .highlight {',
