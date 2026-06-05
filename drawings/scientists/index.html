@@ -81,7 +81,9 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
+            /* Sit above the rectangles toggle button (z-index 1000) so the
+               colored swatch is not visible over the enlarged image */
+            z-index: 2000;
         }
 
         .modal img {
@@ -114,6 +116,12 @@
         .modal.show {
             display: block;
         }
+    </style>
+
+    <style id="sticky-footer-style">
+        /* Keep the copyright footer pinned to the bottom of short pages. */
+        body { min-height: calc(100vh - 4rem); }
+        body > footer.site-copyright { position: sticky; top: 100vh; }
     </style>
 </head>
 <body>
