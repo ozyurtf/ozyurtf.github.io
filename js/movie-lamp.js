@@ -271,8 +271,17 @@
         return 'p';
     }
 
+    // Everything the beam can aim at: the page's main target plus the nav
+    // option links (Projects / Drawings / Home), each of which carries its own
+    // coloured hover rectangle. aim() reads each element's own hover colour, so
+    // the beam lands on a nav option tinted that option's colour.
+    function aimNodes() {
+        var sel = targetSelector() + ', .nav a, nav a';
+        return document.querySelectorAll(sel);
+    }
+
     function attach() {
-        document.querySelectorAll(targetSelector()).forEach(function (li) {
+        aimNodes().forEach(function (li) {
             li.addEventListener('mouseenter', function () {
                 if (isOff()) return;
                 current = li;
