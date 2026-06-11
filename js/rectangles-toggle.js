@@ -43,7 +43,7 @@
         // outline and hard offset shadow as the hover rectangles it controls.
         '.rect-toggle:hover .rect-swatch {',
         '  border-color: #000;',
-        '  box-shadow: 0 0 0 1px #000, 5px 5px 0 0 #000;',
+        '  box-shadow: 0 0 0 1px #000, -5px 5px 0 0 #000;',
         '}',
         'html.rects-off .rect-toggle .rect-swatch {',
         '  background: transparent;',
@@ -59,7 +59,7 @@
         'li.has-desc:hover,',
         '.topics a:hover {',
         '  border-color: #000;',
-        '  box-shadow: 0 0 0 1px #000, 5px 5px 0 0 #000;',
+        '  box-shadow: 0 0 0 1px #000, -5px 5px 0 0 #000;',
         '}',
         // The project title links live inside `li.has-desc`, which already
         // draws its own rectangle on hover. Keep them plain so we do not get a
