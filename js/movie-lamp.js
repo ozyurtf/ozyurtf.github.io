@@ -34,13 +34,14 @@
         '  width: 42px; height: 12px;',
         '  box-sizing: border-box;',
         '  background: #fff;',
-        '  border: 2px solid #727272;',
+        '  border: 1.6px solid #727272;',
         '  border-radius: 2px;',
         '}',
+        // Drawn as an SVG line (not a CSS div) so its stroke renders with the
+        // exact same weight as the lamp body and pull-rope.
         '.lamp-rod {',
         '  position: absolute; top: 0;',
-        '  width: 2px;',
-        '  background: #727272;',
+        '  overflow: visible;',
         '}',
         // Pull-chain: hangs from the lamp joint; pull it to toggle rectangles.
         '.lamp-pull {',
@@ -82,7 +83,7 @@
     // ---- Lamp head: line-art capsule, hangs down (apex 20,4 / lens exit 20,44)
     var lampSVG = [
         '<svg width="40" height="50" viewBox="0 0 40 50" xmlns="http://www.w3.org/2000/svg" ',
-        '     fill="none" stroke="#727272" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">',
+        '     fill="none" stroke="#727272" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">',
         // arch top, straight sides, flat bottom
         '  <path d="M11 44 L11 14 A 9 10 0 0 1 29 14 L29 44 Z" fill="#ffffff"/>',
         // glowing lens section (recoloured at runtime)
@@ -121,8 +122,11 @@
     var beamGrad = svg.querySelector('#ml-beam');
     var stops = svg.querySelectorAll('stop');
 
-    var rod = document.createElement('div');
-    rod.className = 'lamp-rod';
+    var rod = document.createElementNS(NS, 'svg');
+    rod.setAttribute('class', 'lamp-rod');
+    rod.innerHTML = '<line x1="2" y1="0" x2="2" y2="0" stroke="#727272" ' +
+        'stroke-width="1.6" stroke-linecap="round"/>';
+    var rodLine = rod.querySelector('line');
     var plate = document.createElement('div');
     plate.className = 'lamp-plate';
 
@@ -168,8 +172,11 @@
         pivot.y = KNUCKLE_Y;
         head.style.left = pivot.x + 'px';
         head.style.top = pivot.y + 'px';
-        rod.style.left = (pivot.x - 1) + 'px';
-        rod.style.height = pivot.y + 'px';
+        rod.style.left = (pivot.x - 2) + 'px';
+        rod.setAttribute('width', 4);
+        rod.setAttribute('height', pivot.y);
+        rod.setAttribute('viewBox', '0 0 4 ' + pivot.y);
+        rodLine.setAttribute('y2', pivot.y);
         plate.style.left = (pivot.x - 21) + 'px';
         // Chain joins the underside of the base, just right of the rod.
         pull.style.left = (pivot.x + 6) + 'px';
