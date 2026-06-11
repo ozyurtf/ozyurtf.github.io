@@ -301,7 +301,9 @@
         document.body.appendChild(lamp);
         placePivot();
         attach();
-        ACCENT = readAccent();
+        // Pages with no hover targets (e.g. the image gallery) show the lamp
+        // as a fixture only: no light, and a neutral unlit lens.
+        ACCENT = document.querySelector(targetSelector()) ? readAccent() : '#cfcfcf';
         syncActive();
 
         pull.addEventListener('click', yankRope);
