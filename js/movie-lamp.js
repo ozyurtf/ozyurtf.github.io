@@ -301,10 +301,8 @@
         if (isOff()) {
             current = null;
             lamp.classList.remove('lit');
-            if (anim) { cancelAnimationFrame(anim); anim = null; }
-            headAngle = Math.PI / 2;                   // baseline
-            applyHead(headAngle);                      // hang straight down
             lens.setAttribute('fill', OFF_LENS);      // lens dark / closed
+            tiltTo(Math.PI / 2, null, false);          // swing back to hang straight down
         } else {
             lens.setAttribute('fill', ACCENT);
             idle();
