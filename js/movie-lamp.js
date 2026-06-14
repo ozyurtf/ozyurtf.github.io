@@ -67,11 +67,12 @@
         // Soft theatrical light: intensity comes from the gradients inside,
         // multiply keeps any black shadow/outline untouched.
         '.movie-lamp.lit .lamp-beam-svg { opacity: 1; }',
-        // The canister head, tilting on the knuckle.
+        // The canister head tilts on the knuckle. Its rotation is driven in JS
+        // (see tiltTo) rather than a CSS transition, so the beam can be redrawn
+        // on every frame and stay glued to the lens as the head sweeps.
         '.lamp-head {',
         '  position: absolute;',
         '  transform-origin: 0 0;',
-        '  transition: transform .35s cubic-bezier(.34,.1,.2,1);',
         '}',
         '.lamp-head svg { position: absolute; left: -20px; top: -4px; }',
         // The pull-rope replaces the swatch toggle on pages that have a lamp.
@@ -186,46 +187,87 @@
         svg.setAttribute('viewBox', '0 0 ' + window.innerWidth + ' ' + window.innerHeight);
     }
 
-    // Tilt the head so its lens points at (tx,ty). Baseline hangs straight
-    // down, so subtract 90deg. Returns the lens centre plus the aim unit
-    // vector, so the beam can spread from the full lens opening.
-    function tiltTo(tx, ty) {
-        var ang = Math.atan2(ty - pivot.y, tx - pivot.x);
+    // Live head aim angle (radians, before the -90deg baseline). Baseline
+    // hangs straight down = +90deg. The head rotation and the beam are both
+    // driven from this single value so they can never drift apart.
+    var headAngle = Math.PI / 2;
+    var anim = null;            // in-flight rAF id for the tilt animation
+    var aimTarget = null;       // snapshot of the card the beam is painting onto
+
+    function applyHead(ang) {
         head.style.transform = 'rotate(' + (ang * 180 / Math.PI - 90) + 'deg)';
-        var ux = Math.cos(ang), uy = Math.sin(ang);
-        return { x: pivot.x + LENS_DIST * ux, y: pivot.y + LENS_DIST * uy, ux: ux, uy: uy };
     }
 
-    function aim(li) {
+    // Paint the beam for card target `t` with the head at the live angle `ang`,
+    // so the beam mouth stays glued to the lens while the head sweeps. The far
+    // edge lands on the card's right-hand corners.
+    function drawBeam(t, ang) {
+        var ux = Math.cos(ang), uy = Math.sin(ang);
+        var lx = pivot.x + LENS_DIST * ux, ly = pivot.y + LENS_DIST * uy;
+        // Cone spreads from the full lens opening (perpendicular to the aim)
+        // out to the card's right-hand corners.
+        var px = -uy * LENS_RADIUS, py = ux * LENS_RADIUS;
+        cone.setAttribute('points',
+            (lx + px) + ',' + (ly + py) + ' ' +
+            t.r.right + ',' + t.r.top + ' ' +
+            t.r.right + ',' + t.r.bottom + ' ' +
+            (lx - px) + ',' + (ly - py));
+        // Falloff runs from the lens (bright) to the card (faint).
+        beamGrad.setAttribute('x1', lx); beamGrad.setAttribute('y1', ly);
+        beamGrad.setAttribute('x2', t.r.right); beamGrad.setAttribute('y2', t.midY);
+        // Soft pool over the card.
+        pool.setAttribute('cx', (t.r.left + t.r.right) / 2);
+        pool.setAttribute('cy', t.midY);
+        pool.setAttribute('rx', t.r.width / 2 + 14);
+        pool.setAttribute('ry', t.r.height / 2 + 10);
+        // Recolour everything to the card's colour.
+        for (var i = 0; i < stops.length; i++) stops[i].setAttribute('stop-color', t.c);
+        lens.setAttribute('fill', t.c);
+    }
+
+    // Swing the head from its current angle to `ang` over one easing curve,
+    // redrawing the beam (when a card target `t` is given) on every frame so
+    // light and lamp move as one. `instant` snaps with no animation, used when
+    // tracking scroll/resize where any lag would read as a disconnect.
+    function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+    function tiltTo(ang, t, instant) {
+        if (anim) { cancelAnimationFrame(anim); anim = null; }
+        if (instant) {
+            headAngle = ang;
+            applyHead(ang);
+            if (t) drawBeam(t, ang);
+            return;
+        }
+        var from = headAngle;
+        var delta = ang - from;                       // take the short way round
+        while (delta > Math.PI) delta -= 2 * Math.PI;
+        while (delta < -Math.PI) delta += 2 * Math.PI;
+        var start = null, DUR = 350;
+        function frame(now) {
+            if (start === null) start = now;
+            var p = Math.min(1, (now - start) / DUR);
+            var cur = from + delta * easeOut(p);
+            headAngle = cur;
+            applyHead(cur);
+            if (t) drawBeam(t, cur);
+            anim = p < 1 ? requestAnimationFrame(frame) : null;
+        }
+        anim = requestAnimationFrame(frame);
+    }
+
+    function aim(li, instant) {
         var r = li.getBoundingClientRect();
         var c = window.getComputedStyle(li).backgroundColor;
         if (!c || c === 'transparent' || c === 'rgba(0, 0, 0, 0)') c = ACCENT;
-
-        var a = tiltTo(r.right, (r.top + r.bottom) / 2);
         var midY = (r.top + r.bottom) / 2;
-        // Cone spreads from the full lens opening (perpendicular to the aim)
-        // out to the card's right-hand corners.
-        var px = -a.uy * LENS_RADIUS, py = a.ux * LENS_RADIUS;
-        cone.setAttribute('points',
-            (a.x + px) + ',' + (a.y + py) + ' ' +
-            r.right + ',' + r.top + ' ' +
-            r.right + ',' + r.bottom + ' ' +
-            (a.x - px) + ',' + (a.y - py));
-        // Falloff runs from the lens (bright) to the card (faint).
-        beamGrad.setAttribute('x1', a.x); beamGrad.setAttribute('y1', a.y);
-        beamGrad.setAttribute('x2', r.right); beamGrad.setAttribute('y2', midY);
-        // Soft pool over the card.
-        pool.setAttribute('cx', (r.left + r.right) / 2);
-        pool.setAttribute('cy', midY);
-        pool.setAttribute('rx', r.width / 2 + 14);
-        pool.setAttribute('ry', r.height / 2 + 10);
-        // Recolour everything to the card's colour.
-        for (var i = 0; i < stops.length; i++) stops[i].setAttribute('stop-color', c);
-        lens.setAttribute('fill', c);
+        aimTarget = { r: r, c: c, midY: midY };
+        var ang = Math.atan2(midY - pivot.y, r.right - pivot.x);
+        tiltTo(ang, aimTarget, instant);
     }
 
     function idle() {
-        tiltTo(pivot.x - 200, pivot.y + 220);
+        aimTarget = null;
+        tiltTo(Math.atan2(220, -200), null, false);
     }
 
     // The page's hover-rectangle colour (red on Projects, blue on Home, green
@@ -259,7 +301,9 @@
         if (isOff()) {
             current = null;
             lamp.classList.remove('lit');
-            head.style.transform = 'rotate(0deg)';   // hang straight down
+            if (anim) { cancelAnimationFrame(anim); anim = null; }
+            headAngle = Math.PI / 2;                   // baseline
+            applyHead(headAngle);                      // hang straight down
             lens.setAttribute('fill', OFF_LENS);      // lens dark / closed
         } else {
             lens.setAttribute('fill', ACCENT);
@@ -337,11 +381,11 @@
         window.addEventListener('resize', function () {
             placePivot();
             if (isOff()) syncActive();
-            else if (current) aim(current);
+            else if (current) aim(current, true);
             else idle();
         });
         window.addEventListener('scroll', function () {
-            if (current && !isOff()) aim(current);
+            if (current && !isOff()) aim(current, true);
         }, { passive: true });
     }
 
