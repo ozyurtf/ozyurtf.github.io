@@ -59,10 +59,20 @@
             background-color: #77e93a;
         }
 
+        .nav a.active {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        .nav a.active:hover {
+            text-decoration: none;
+        }
+
         /* Each paragraph gets a yellow rectangle on hover, matching the
            site's blue (Home), red (Projects), and green (Drawings) tabs. */
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.4rem;
             text-align: justify;
             text-justify: inter-word;
             hyphens: auto;
@@ -106,7 +116,7 @@
 <body>
     <div class="nav">
         <a href="../../" class="nav-home">Home</a>
-        <a href="../" class="nav-neuroscience">Neuroscience</a>
+        <a href="../" class="nav-neuroscience active">Neuroscience</a>
         <a href="../../projects/" class="nav-projects">Projects</a>
         <a href="../../drawings/" class="nav-drawings">Drawings</a>
     </div>
