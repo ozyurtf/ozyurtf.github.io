@@ -325,7 +325,12 @@
     // coloured hover rectangle. aim() reads each element's own hover colour, so
     // the beam lands on a nav option tinted that option's colour.
     function aimNodes() {
-        var sel = targetSelector() + ', .nav a, nav a';
+        var base = targetSelector();
+        var sel = base + ', .nav a, nav a';
+        // The Neuroscience landing page carries both the topic links and an
+        // intro note paragraph. When the topic links are the main target, let
+        // the beam land on the note paragraph too (it shares the yellow hover).
+        if (base === '.topics a') sel += ', p';
         return document.querySelectorAll(sel);
     }
 
