@@ -1,4 +1,5 @@
 <!-- © 2026 Furkan Ozyurt. All Rights Reserved. Unauthorized copying, reuse, or distribution of this code or content is prohibited. -->
+<!-- The paragraphs below were generated from ./note.txt. To update this page, edit note.txt and regenerate. -->
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-    <title>Neuroscience</title>
+    <title>Wernicke’s Area</title>
     <style>
         body {
             font-family: Avenir, 'Avenir Next', 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -60,21 +61,18 @@
 
         .nav a.active {
             text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
         }
 
         .nav a.active:hover {
             text-decoration: none;
         }
 
-        a {
-            color: #1a1a1a;
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 2px;
-        }
-
+        /* Each paragraph gets a yellow rectangle on hover, matching the
+           site's blue (Home), red (Projects), and green (Drawings) tabs. */
         p {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             text-align: justify;
             text-justify: inter-word;
             hyphens: auto;
@@ -89,50 +87,23 @@
             transition: border-color .18s ease, background-color .18s ease;
         }
 
-        /* Hovering the note draws a dark-gray rectangle filled with the
-           Neuroscience tab color, matching the topics and tab hovers. */
         p:hover {
             border-color: #555;
             background-color: #ffd84d;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 2rem;
+        .reference {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #555;
         }
 
-        li {
-            margin-bottom: 0.8rem;
+        .reference .book {
+            font-style: italic;
         }
 
-        /* Each topic gets a yellow rectangle on hover, matching the
-           Neuroscience tab and the rectangles on the topic pages. */
-        .topics a {
-            display: inline-block;
-            padding: 4px 9px;
-            /* Offset the padding/border so the text still aligns with the
-               page content on the left (matches the nav tab offset) */
-            margin-left: -10px;
-            border: 1px solid transparent;
-            border-radius: 2px;
-            transition: border-color .18s ease, background-color .18s ease;
-        }
-
-        /* Drop the underline once the rectangle appears on hover. */
-        .topics a:hover {
-            text-decoration: none;
-            border-color: #555;
-            background-color: #ffd84d;
-        }
-
-        .destination-image {
-            margin: 3rem 0 0 0;
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            display: block;
-            clip-path: inset(0 2px 2px 0);
+        .reference .author {
+            font-weight: 700;
         }
     </style>
 
@@ -144,29 +115,22 @@
 
 <body>
     <div class="nav">
-        <a href="../" class="nav-home">Home</a>
-        <a href="../neuroscience/" class="nav-neuroscience active">Neuroscience</a>
-        <a href="../projects/" class="nav-projects">Projects</a>
-        <a href="../drawings/" class="nav-drawings">Drawings</a>
+        <a href="../../" class="nav-home">Home</a>
+        <a href="../" class="nav-neuroscience active">Neuroscience</a>
+        <a href="../../projects/" class="nav-projects">Projects</a>
+        <a href="../../drawings/" class="nav-drawings">Drawings</a>
     </div>
 
-    <p>
-        Since I read "Incognito" (by David Eagleman) in 2018, reading and learning about neuroscience and (trying to)
-        understand how our brains work has been one of my favorite hobbies. Until a couple of months ago, I had
-        been reading mostly non-technical books, but I decided to dive into more detail and learn more about
-        different brain regions (e.g., hippocampus, thalamus, parietal cortex, entorhinal cortex, perirhinal cortex,
-        occipital cortex, etc.), their impacts on our daily lives, the moments when these regions are activated, how
-        they communicate with each other, and so on. While reading these books, I stop and write
-        down my understanding of the sections from my point of view, and you can see the notes I took below.
-    </p>
+    <div id="note">
+        <p>Let’s say that we are sitting in a coffee shop on Murphy Avenue in Sunnyvale and, while writing our understanding of Wernicke’s area, a sound wave enters our ear. This activates a group of neurons in the auditory cortex, and this activation activates the neurons in Wernicke’s area later. After this moment, we experience the feeling of “Iced americano?” Here, basically, Wernicke’s area’s responsibility is to map the neuronal patterns coming from the auditory cortex into the right words.</p>
 
-    <ul class="topics">
-        <li><a href="./anterior-temporal-lobe/">Anterior Temporal Lobe</a></li>
-        <li><a href="./wernickes-area/">Wernicke’s Area</a></li>
-    </ul>
+        <p>If the person has a hearing disability, the activation in the auditory cortex may not be as rich as the activations in a person who can hear very clearly. As a result of this, Wernicke’s area, which is activated upon the activation of the auditory cortex, might experience more difficulties mapping the incoming neural patterns into the right word, and this may require activation of some other brain regions to get the right word from other clues in the context.</p>
 
-    <script src="../js/rectangles-toggle.js"></script>
-    <script src="../js/movie-lamp.js"></script>
+        <p>And if the person is in a noisy restaurant with a group of friends, the ongoing situation of the inability to map the incoming sound patterns into the right words results in an overactive brain state that continuously tries to compress all the information coming from different parts of the brain (into the words that are meant by the speaker). This compression requires a lot of energy, and the constant process of failing to use a large amount of information that becomes available with the activation of various brain regions and compressing it into a lower-dimensional state might be the root cause of the negative feelings these people experience during those moments. Even if the person does not have any hearing problems, if Wernicke’s area fails to map the sound patterns into the right word, similar problems may occur.</p>
+    </div>
+
+    <script src="../../js/rectangles-toggle.js"></script>
+    <script src="../../js/movie-lamp.js"></script>
 </body>
 
 </html>

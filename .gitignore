@@ -3,6 +3,7 @@ figures/boxes.png
 assets/Furkan-Ozyurt-Resume.docx
 theoretical-ai/entropy/index.html
 
-# Neuroscience subpages kept private (only left-anterior-temporal-lobe is public)
+# Neuroscience subpages kept private (only the ones un-ignored below are public)
 neuroscience/*/
 !neuroscience/anterior-temporal-lobe
+!neuroscience/wernickes-area
