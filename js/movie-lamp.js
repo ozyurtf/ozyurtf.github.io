@@ -6,13 +6,16 @@
 // and rod drop from the ceiling to a tilting canister head. When the cursor is
 // over a project description the head tilts to aim at it and casts a soft beam
 // whose two edges land exactly on the rectangle's top-right and bottom-right
-// corners. The beam is a light multiply wash of the rectangle's own colour, so
-// it tints without hiding the rectangle's black outline and hard shadow.
+// corners. The beam is a light multiply wash, so it tints without hiding the
+// rectangle's black outline and hard shadow. The light is the same warm yellow
+// on every page, whatever colour the rectangle underneath it happens to be.
 // When the hover rectangles are toggled off, the lamp stays but goes inactive:
 // it hangs straight down with the lens dark and no beam.
 (function () {
     var NS = 'http://www.w3.org/2000/svg';
-    var FALLBACK = '#fe7070';   // the Projects hover colour
+    // One light colour for the whole site: the warm yellow of the Neuroscience
+    // tab. Used for the lens and the beam on every page.
+    var LIGHT = '#ffd84d';
     var OFF_LENS = '#d6d6d6';   // lens colour when the lamp is switched off
     var KNUCKLE_Y = 64;         // where the rod meets the head (viewport y)
     var LENS_DIST = 40;         // knuckle (arch apex) -> lens exit, along the aim
@@ -88,7 +91,7 @@
         // arch top, straight sides, flat bottom
         '  <path d="M11 44 L11 14 A 9 10 0 0 1 29 14 L29 44 Z" fill="#ffffff"/>',
         // glowing lens section (recoloured at runtime)
-        '  <rect class="lamp-lens" x="12" y="38.4" width="16" height="4.8" rx="1" fill="#fe7070" stroke="none"/>',
+        '  <rect class="lamp-lens" x="12" y="38.4" width="16" height="4.8" rx="1" fill="#ffd84d" stroke="none"/>',
         // lens divider line
         '  <line x1="11" y1="38" x2="29" y2="38"/>',
         '</svg>'
@@ -102,12 +105,12 @@
     svg.innerHTML = [
         '<defs>',
         '  <linearGradient id="ml-beam" gradientUnits="userSpaceOnUse">',
-        '    <stop offset="0" stop-color="#fe7070" stop-opacity="0.42"/>',
-        '    <stop offset="1" stop-color="#fe7070" stop-opacity="0.08"/>',
+        '    <stop offset="0" stop-color="#ffd84d" stop-opacity="0.42"/>',
+        '    <stop offset="1" stop-color="#ffd84d" stop-opacity="0.08"/>',
         '  </linearGradient>',
         '  <radialGradient id="ml-pool">',
-        '    <stop offset="0" stop-color="#fe7070" stop-opacity="0.30"/>',
-        '    <stop offset="1" stop-color="#fe7070" stop-opacity="0"/>',
+        '    <stop offset="0" stop-color="#ffd84d" stop-opacity="0.30"/>',
+        '    <stop offset="1" stop-color="#ffd84d" stop-opacity="0"/>',
         '  </radialGradient>',
         '  <filter id="ml-soft" x="-35%" y="-35%" width="170%" height="170%">',
         '    <feGaussianBlur stdDeviation="5"/>',
@@ -220,9 +223,9 @@
         pool.setAttribute('cy', t.midY);
         pool.setAttribute('rx', t.r.width / 2 + 14);
         pool.setAttribute('ry', t.r.height / 2 + 10);
-        // Recolour everything to the card's colour.
-        for (var i = 0; i < stops.length; i++) stops[i].setAttribute('stop-color', t.c);
-        lens.setAttribute('fill', t.c);
+        // The light keeps its own colour; only its shape follows the card.
+        for (var i = 0; i < stops.length; i++) stops[i].setAttribute('stop-color', LIGHT);
+        lens.setAttribute('fill', LIGHT);
     }
 
     // Swing the head from its current angle to `ang` over one easing curve,
@@ -257,10 +260,8 @@
 
     function aim(li, instant) {
         var r = li.getBoundingClientRect();
-        var c = window.getComputedStyle(li).backgroundColor;
-        if (!c || c === 'transparent' || c === 'rgba(0, 0, 0, 0)') c = ACCENT;
         var midY = (r.top + r.bottom) / 2;
-        aimTarget = { r: r, c: c, midY: midY };
+        aimTarget = { r: r, midY: midY };
         var ang = Math.atan2(midY - pivot.y, r.right - pivot.x);
         tiltTo(ang, aimTarget, instant);
     }
@@ -268,28 +269,6 @@
     function idle() {
         aimTarget = null;
         tiltTo(Math.atan2(220, -200), null, false);
-    }
-
-    // The page's hover-rectangle colour (red on Projects, blue on Home, green
-    // on Drawings), read from the stylesheet so the resting lens matches.
-    var ACCENT = FALLBACK;
-    function readAccent() {
-        var base = targetSelector();
-        var test;
-        if (base === 'li.has-desc') test = function (s) { return s.indexOf('has-desc') !== -1; };
-        else if (base === '.topics a') test = function (s) { return s.indexOf('topics a') !== -1; };
-        else test = function (s) { return /(^|[\s,])p:hover/.test(s); };
-        for (var s = 0; s < document.styleSheets.length; s++) {
-            var rules;
-            try { rules = document.styleSheets[s].cssRules; } catch (e) { continue; }
-            for (var i = 0; rules && i < rules.length; i++) {
-                var sel = rules[i].selectorText || '';
-                if (sel.indexOf(':hover') === -1 || !test(sel)) continue;
-                var bg = rules[i].style && rules[i].style.backgroundColor;
-                if (bg) return bg;
-            }
-        }
-        return FALLBACK;
     }
 
     // ---- Active / inactive (follows the rectangles toggle) ---------------
@@ -304,7 +283,7 @@
             lens.setAttribute('fill', OFF_LENS);      // lens dark / closed
             tiltTo(Math.PI / 2, null, false);          // swing back to hang straight down
         } else {
-            lens.setAttribute('fill', ACCENT);
+            lens.setAttribute('fill', LIGHT);
             idle();
         }
     }
@@ -364,9 +343,6 @@
         document.body.appendChild(lamp);
         placePivot();
         attach();
-        // Pages with no hover targets (e.g. the image gallery) show the lamp
-        // as a fixture only: no light, and a neutral unlit lens.
-        ACCENT = document.querySelector(targetSelector()) ? readAccent() : '#cfcfcf';
         syncActive();
 
         pull.addEventListener('click', yankRope);
