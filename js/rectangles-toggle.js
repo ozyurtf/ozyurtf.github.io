@@ -36,7 +36,7 @@
         '  height: 13px;',
         '  border-radius: 2px;',
         '  border: 1px solid #555;',
-        '  background: linear-gradient(135deg, #8fbef4 0 33%, #fe7070 33% 66%, #77e93a 66% 100%);',
+        '  background: #ffd84d;',
         '  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;',
         '}',
         // Hovering the toggle button gives its swatch the same thick black
