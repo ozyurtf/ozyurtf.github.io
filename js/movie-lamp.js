@@ -21,6 +21,10 @@
     var LENS_DIST = 40;         // knuckle (arch apex) -> lens exit, along the aim
     var LENS_RADIUS = 9;        // half-width of the lens opening (the beam mouth)
     var LINE = '#727272';          // line-art stroke colour (matches the page)
+    // Click sound for the pull-rope. Resolved against this script's own URL so
+    // it works from pages at any folder depth.
+    var SCRIPT_SRC = document.currentScript && document.currentScript.src;
+    var clickSound = null;      // created on the first pull that turns the lamp on
 
     // ---- Styles ----------------------------------------------------------
     var style = document.createElement('style');
@@ -334,6 +338,11 @@
     function yankRope() {
         var off = document.documentElement.classList.toggle('rects-off');
         try { localStorage.setItem('rectangles', off ? 'off' : 'on'); } catch (e) {}
+        if (!off && SCRIPT_SRC) {                    // only when switching on
+            if (!clickSound) clickSound = new Audio(new URL('../audio/gotcha.mp3', SCRIPT_SRC).href);
+            clickSound.currentTime = 0;              // restart on rapid pulls
+            clickSound.play().catch(function () {});
+        }
         pull.classList.remove('pulling');
         void pull.offsetWidth;           // restart the animation
         pull.classList.add('pulling');
